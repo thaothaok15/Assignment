@@ -1,0 +1,45 @@
+.col1{
+    width: 15%;
+    height: 15%;
+    border: 2px solid black;
+    text-align: center;
+}
+.col2{
+    width: 10%;
+    height: 15%;
+    border: 2px solid black;
+    text-align: center;
+}
+.col3{
+    width: 10%;
+    height: 15%;
+    border: 2px solid black;
+    text-align: center;
+}
+.col4{
+    width: 10%;
+    height: 15%;
+    border: 2px solid black;
+    text-align: center;
+}
+.col5{
+    width: 15%;
+    height: 15%;
+    border: 2px solid black;
+    text-align: center;
+}
+.col6{
+    width: 1%;
+}
+.col7{
+    width: 1%;
+}
+img{
+    width: 100%;
+    height: 100%
+}
+.cardAdd{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2vh;
+}
