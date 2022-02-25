@@ -1,7 +1,7 @@
 <%-- 
     Document   : Signup
     Created on : Dec 22, 2021, 2:47:56 PM
-    Author     : coder
+    Author     : Thanh Thao
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LeeStore</title>
+        <title>Beauty Cosmetic</title>
         <link rel="stylesheet" href="css/StyleSignup.css">
     </head>
     <body>

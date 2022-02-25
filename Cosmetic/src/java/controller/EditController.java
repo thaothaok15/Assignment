@@ -19,7 +19,7 @@ import model.DBProduct;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class EditController extends HttpServlet {
 

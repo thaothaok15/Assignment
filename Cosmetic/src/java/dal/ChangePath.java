@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filler;
+package dal;
 
 import Entity.Account;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class ChangePath implements Filter {
 

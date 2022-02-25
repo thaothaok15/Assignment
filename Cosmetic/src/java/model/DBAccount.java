@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class DBAccount {
     private DBContext db;

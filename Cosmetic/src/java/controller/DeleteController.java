@@ -18,7 +18,7 @@ import model.DBProduct;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class DeleteController extends HttpServlet {
 

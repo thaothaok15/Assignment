@@ -16,7 +16,7 @@ import model.DBProduct;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class AddController extends HttpServlet {
 

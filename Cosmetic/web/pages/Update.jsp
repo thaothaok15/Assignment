@@ -1,7 +1,7 @@
 <%-- 
     Document   : Update
     Created on : Dec 16, 2021, 4:17:43 PM
-    Author     : coder
+    Author     : Thanh Thao
 --%>
 
 <%@page import="Entity.Product"%>

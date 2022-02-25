@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class TrademarkController extends HttpServlet {
 

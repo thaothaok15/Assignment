@@ -17,7 +17,7 @@ import model.DBProduct;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class UpdateController extends HttpServlet {
     private int id;

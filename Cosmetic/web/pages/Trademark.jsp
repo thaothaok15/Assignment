@@ -1,7 +1,7 @@
 <%-- 
     Document   : Trademark
     Created on : Dec 22, 2021, 12:48:26 AM
-    Author     : coder
+    Author     : Thanh Thao
 --%>
 
 <%@page import="Entity.Account"%>
@@ -16,7 +16,7 @@
     %>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LeeStore</title>
+        <title>Beauty Cosmetic</title>
         <link rel="stylesheet" href="css/stylehome.css">
         <script src="js/JSHome.js"></script>
     </head>
@@ -27,7 +27,7 @@
                     <img src="images/logo.png">
                 </div>
                 <div style="text-align: center;">
-                    <h3 style="font-size: 3vh; margin: 0px; color: yellow">LeeStore</h3>
+                    <h3 style="font-size: 3vh; margin: 0px; color: yellow">Beauty Cosmetic</h3>
                     <h5 style="margin: 0px;color: #c13434;">Hotline: 0989.355.382</h5>
                 </div>
                 <div class="menu">

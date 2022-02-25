@@ -1,7 +1,7 @@
 <%-- 
     Document   : Add.jsp
     Created on : Dec 15, 2021, 9:34:27 PM
-    Author     : coder
+    Author     : Thanh Thao
 --%>
 
 <%@page import="javafx.scene.control.Alert"%>

@@ -18,7 +18,7 @@ import model.DBAccount;
 
 /**
  *
- * @author coder
+ * @author Thanh Thao
  */
 public class LoginController extends HttpServlet {
 
