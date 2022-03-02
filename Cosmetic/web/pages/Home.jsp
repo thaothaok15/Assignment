@@ -20,7 +20,7 @@
         <header>
             <div class="header1">
                 <div class="header--logo">
-                    <img src="images/logo.png">
+                    <img src="images/logo.jpg">
                 </div>
                 <div style="text-align: center;">
                     <h3 style="font-size: 3vh; margin: 0px; color: yellow">Beauty Cosmetic</h3>
