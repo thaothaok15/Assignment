@@ -5,21 +5,22 @@
  */
 package controller;
 
-import dal.DBProduct;
+import dal.DBAccount;
+import model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Product;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Thanh Thao
  */
-public class HomeController extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,15 +32,21 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-      //  response.setContentType("text/html;charset=UTF-8");
-//        DBProduct product = new DBProduct();
-//        List<Product> list = product.getAllProduct();
-//        request.setAttribute("listP", list);
-//        request.getRequestDispatcher("Home.jsp").forward(request, response);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
-
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -53,12 +60,8 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-         DBProduct product = new DBProduct();
-        List<Product> list = product.getAllProduct();
-        request.setAttribute("listP", list);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
-
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/login.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -72,7 +75,26 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+       String userName = "";
+        String password = "";
+        if (request.getParameter("userName") != null) {
+            userName = request.getParameter("userName").toString();
+        }
+        if (request.getParameter("password") != null) {
+            password = request.getParameter("password").toString();
+        }
+        DBAccount DBA = new DBAccount();
+        Account account = DBA.getAccount(userName, password);
+        if (account == null){
+            String error = "Sai tên đăng nhập hoặc mật khẩu";
+            RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login.jsp");
+            request.setAttribute("error", error);
+            dispatcher.forward(request, response);
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("account", account);
+        
+        response.sendRedirect("index");
     }
 
     /**
