@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dal.DBCategories;
 import dal.DBProduct;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Categories;
 import model.Product;
 
 /**
@@ -56,7 +58,10 @@ public class HomeController extends HttpServlet {
       //  processRequest(request, response);
          DBProduct product = new DBProduct();
         List<Product> list = product.getAllProduct();
+        DBCategories category = new DBCategories();
+         List<Categories> list2 = category.getAllCategories();
         request.setAttribute("listP", list);
+        request.setAttribute("listC", list2);
         request.getRequestDispatcher("Home.jsp").forward(request, response);
 
     }
