@@ -20,7 +20,7 @@ import model.Product;
  *
  * @author Thanh Thao
  */
-public class HomeController extends HttpServlet {
+public class DetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,15 +32,21 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-      //  response.setContentType("text/html;charset=UTF-8");
-//        DBProduct product = new DBProduct();
-//        List<Product> list = product.getAllProduct();
-//        request.setAttribute("listP", list);
-//        request.getRequestDispatcher("Home.jsp").forward(request, response);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DetailController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DetailController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
-
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,15 +60,17 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-        DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
-       
-         List<Categories> list2 = dao.getAllCategories();
-        request.setAttribute("listP", list);
-        request.setAttribute("listC", list2);
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
-
+        String productID = request.getParameter("productID");
+         DAO dao = new DAO();
+         Product p = dao.getProductByID(productID);
+         
+            List<Categories> list2 = dao.getAllCategories();
+            request.setAttribute("listC", list2);
+            
+          //  request.setAttribute("tag", categoryID);
+         
+         request.setAttribute("detail", p);
+         request.getRequestDispatcher("Detail.jsp").forward(request, response);
     }
 
     /**
@@ -76,7 +84,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
