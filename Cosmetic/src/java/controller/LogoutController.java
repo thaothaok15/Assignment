@@ -57,10 +57,9 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.setAttribute("account", null);
-        response.sendRedirect("Home");
-       
+         HttpSession session = request.getSession();
+       session.removeAttribute("acc");
+       response.sendRedirect("home");
     }
 
     /**
@@ -75,6 +74,7 @@ public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+      
     }
 
     /**
