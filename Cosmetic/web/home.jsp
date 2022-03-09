@@ -70,7 +70,7 @@
                         </li>
                         </c:if>
                         <li>
-                        <a href="#my-Register" class="header__account-register">Đăng Kí</a>
+                        <a href="Signup.jsp" class="header__account-register">Đăng Kí</a>
                         </li>
                          <c:if test="${sessionScope.acc != null}">
                             <li>

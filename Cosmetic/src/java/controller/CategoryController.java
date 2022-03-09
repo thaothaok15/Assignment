@@ -5,8 +5,7 @@
  */
 package controller;
 
-import dal.DBCategories;
-import dal.DBProduct;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -63,11 +62,10 @@ public class CategoryController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
             String categoryID = request.getParameter("categoryID");
-            DBProduct product = new DBProduct();
-            List<Product> list = product.getProductByCategoryID(categoryID);
-            
-            DBCategories category = new DBCategories();
-            List<Categories> list2 = category.getAllCategories();
+            DAO dao = new DAO();
+            List<Product> list = dao.getProductByCategoryID(categoryID);
+
+            List<Categories> list2 = dao.getAllCategories();
             request.setAttribute("listC", list2);
             request.setAttribute("listP", list);
             request.setAttribute("tag", categoryID);
