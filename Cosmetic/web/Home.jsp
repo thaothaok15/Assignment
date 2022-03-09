@@ -50,7 +50,7 @@
                     <div class="header__search">
                         <form action="search" methot="post" class="search infor">
                         <div class="header__search-wrap">
-                            <input name="txt" type="text" class="header__search-input" placeholder="Tìm kiếm">
+                            <input value="${txtS}" name="txt" type="text" class="header__search-input" placeholder="Tìm kiếm">
                             <button type="submit" class="header__search-icon" href="#">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -59,8 +59,24 @@
                     </div>
                         <!--</form>-->
                     <div class="header__account">
-                        <a href="#my-Login" class="header__account-login">Đăng Nhập</a>
-                        <a href="#my-Register" class="header__account-register">Đăng Kí</a>
+                        <c:if test="${sessionScope.acc != null}">
+                             <li class="sub-nav__item">
+                        <a href="#" class="header__nav-link">${sessionScope.acc.userName}</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.acc == null}">
+                            <li>
+                        <a href="Login.jsp" class="header__account-login">Đăng Nhập</a>
+                        </li>
+                        </c:if>
+                        <li>
+                        <a href="Signup.jsp" class="header__account-register">Đăng Kí</a>
+                        </li>
+                         <c:if test="${sessionScope.acc != null}">
+                            <li>
+                        <a href="logout" class="header__account-login">Đăng Xuất</a>
+                        </li>
+                        </c:if>
                     </div>
                     <!-- Cart -->
                     <div class="header__cart have" href="#">
@@ -128,30 +144,15 @@
                     </div>
                 </li>
                 <li class="header__nav-item authen-form">
-                
-                    <c:if test="${sessionScope.acc != null}">
-                        <li class="sub-nav__item">
-                        <a href="#" class="header__nav-link">${sessionScope.acc.userName}</a>
-                        </li>
-                    </c:if>
+                    <a href="#" class="header__nav-link">Tài Khoản</a>
                     <ul class="sub-nav">
-                       
-                        <c:if test="${sessionScope.acc == null}">
                         <li class="sub-nav__item">
                             <a href="#my-Login" class="sub-nav__link">Đăng Nhập</a>
                         </li>
-                        </c:if>
                         <li class="sub-nav__item">
                             <a href="#my-Register" class="sub-nav__link">Đăng Kí</a>
                         </li>
-                        <c:if test="${sessionScope.acc != null}">
-                        <li class="sub-nav__item">
-                            <a href="logout" class="sub-nav__link">Đăng xuất</a>
-                        </li>
-                        </c:if>
                     </ul>
-                    
-                    
                 </li>
                 <li class="header__nav-item index">
                     <a href="index.html" class="header__nav-link">Trang chủ</a>
@@ -506,7 +507,7 @@
             </div>
         </div>
         <!-- Modal Form -->
-        <div class="ModalForm">
+<!--        <div class="ModalForm">
             <div class="modal" id="my-Register">
                 <form action="signup" method="post" class="form-signup">
                 <a href="#" class="overlay-close"></a>
@@ -568,7 +569,7 @@
                 <i class="fas fa-chevron-up"></i>
             </div>
 
-        </div>
+        </div>-->
         <script>
             $('.owl-carousel.hight').owlCarousel({
                 loop: true,

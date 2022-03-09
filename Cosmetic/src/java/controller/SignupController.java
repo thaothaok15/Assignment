@@ -5,21 +5,21 @@
  */
 package controller;
 
-import Entity.Account;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.DBAccount;
+import javax.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
  * @author Thanh Thao
  */
-public class SignupController extends HttpServlet {
+public class SignUpController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +32,25 @@ public class SignupController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignupController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignupController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        HttpSession session = request.getSession();
+        String username = request.getParameter("userName");
+       String password = request.getParameter("password");
+       String re_password = request.getParameter("re_password");
+       if(!password.equals(re_password)){
+           
+           response.sendRedirect("Signup.jsp");
+       }else{
+           DAO dao = new DAO();
+           Account a = dao.checkAccountExist(username);
+           if(a == null){
+               dao.signup(username, password);
+               
+               response.sendRedirect("home");
+           }else{
+               request.setAttribute("message", "Tài khoản đã tồn tại");
+               response.sendRedirect("Signup.jsp");
+           }
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,9 +65,24 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/Signup.jsp");
-        dispatcher.forward(request, response);
-        //processRequest(request, response);
+        processRequest(request, response);
+//       String username = request.getParameter("userName");
+//       String password = request.getParameter("password");
+//       String repassword = request.getParameter("repassword");
+//       if(!password.equals(repassword)){
+//           
+//           response.sendRedirect("Home.jsp");
+//       }else{
+//           DAO dao = new DAO();
+//           Account a = dao.checkAccountExist(username);
+//           if(a == null){
+//               dao.signup(username, password);
+//               response.sendRedirect("home");
+//           }else{
+//               response.sendRedirect("Home.jsp");
+//           }
+//       }
+//       
     }
 
     /**
@@ -77,82 +96,9 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String username = "";
-        String password = "";
-        String repassword = "";
-        String Fname = "";
-        String Lname = "";
-        boolean empty = false;
-        if (request.getParameter("username") != null) {
-            username = request.getParameter("username");
-            if (username.equals("")) {
-                empty = true;
-            }
-        } else {
-            empty = true;
-        }
-        if (request.getParameter("password") != null) {
-            password = request.getParameter("password");
-            if (password.equals("")) {
-                empty = true;
-            }
-        } else {
-            empty = true;
-        }
-        if (request.getParameter("repassword") != null) {
-            repassword = request.getParameter("repassword");
-            if (repassword.equals("")) {
-                empty = true;
-            }
-        } else {
-            empty = true;
-        }
-        if (request.getParameter("Fname") != null) {
-            Fname = request.getParameter("Fname");
-            if (Fname.equals("")) {
-                empty = true;
-            }
-        } else {
-            empty = true;
-        }
-        if (request.getParameter("Lname") != null) {
-            Lname = request.getParameter("Lname");
-            if (Lname.equals("")) {
-                empty = true;
-            }
-        } else {
-            empty = true;
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/Signup.jsp");
-        if (empty) {
-            String error = "Không được bỏ trống bất kỳ thông tin nào!";
-            request.setAttribute("error", error);
-            dispatcher.forward(request, response);
-        } else {
-            DBAccount DBA = new DBAccount();
-            boolean exist = DBA.checkExistWithUsername(username);
-            if (exist) {
-                String error = "Tên đăng nhập đã tồn tại!";
-                request.setAttribute("error", error);
-                dispatcher.forward(request, response);
-            } else {
-                if (!password.equals(repassword)) {
-                    String error = "Mật khẩu không khớp";
-                    request.setAttribute("error", error);
-                    dispatcher.forward(request, response);
-                } else {
-                    DBA.addAcount(username, password, Fname, Lname);
-                    String error = "Đăng ký thành công";
-                    request.setAttribute("error", error);
-                    dispatcher.forward(request, response);
-                }
-            }
-
-        }
-//        processRequest(request, response);
+        processRequest(request, response);
+       
+       
     }
 
     /**
