@@ -10,36 +10,29 @@ package model;
  * @author Thanh Thao
  */
 public class Account {
-    private int accountID;
+    private int adminID;
     private String userName;
     private String password;
-    private String firtName;
-    private String lastName;
+    private int isSeller;
+    private int isAdmin;
 
     public Account() {
     }
 
-    public Account(int accountID, String userName, String password, String firtName, String lastName) {
-        this.accountID = accountID;
+    public Account(int adminID, String userName, String password, int isSeller, int isAdmin) {
+        this.adminID = adminID;
         this.userName = userName;
         this.password = password;
-        this.firtName = firtName;
-        this.lastName = lastName;
-    }
-    public Account(String userName, String password, String firtName, String lastName) {
-        this.accountID = accountID;
-        this.userName = userName;
-        this.password = password;
-        this.firtName = firtName;
-        this.lastName = lastName;
+        this.isSeller = isSeller;
+        this.isAdmin = isAdmin;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
     }
 
     public String getUserName() {
@@ -58,20 +51,29 @@ public class Account {
         this.password = password;
     }
 
-    public String getFirtName() {
-        return firtName;
+    public int getIsSeller() {
+        return isSeller;
     }
 
-    public void setFirtName(String firtName) {
-        this.firtName = firtName;
+    public void setIsSeller(int isSeller) {
+        this.isSeller = isSeller;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "adminID=" + adminID + ", userName=" + userName + ", password=" + password + ", isSeller=" + isSeller + ", isAdmin=" + isAdmin + '}';
+    }
+
     
 }
+   
+
+    
