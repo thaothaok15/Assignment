@@ -46,14 +46,18 @@
                     <a href="index.html" class="header__logo">
                         <img src="./assets/logo.png" alt="">
                     </a>
+                    
                     <div class="header__search">
+                        <form action="search" methot="post" class="search infor">
                         <div class="header__search-wrap">
-                            <input type="text" class="header__search-input" placeholder="Tìm kiếm">
-                            <a class="header__search-icon" href="#">
+                            <input name="txt" type="text" class="header__search-input" placeholder="Tìm kiếm">
+                            <button type="submit" class="header__search-icon" href="#">
                                 <i class="fas fa-search"></i>
-                            </a>
+                            </button>
                         </div>
+                             </form>
                     </div>
+                        <!--</form>-->
                     <div class="header__account">
                         <a href="#my-Login" class="header__account-login">Đăng Nhập</a>
                         <a href="#my-Register" class="header__account-register">Đăng Kí</a>
@@ -114,127 +118,70 @@
             </div>
             <!-- Menu -->
             <div class="header__nav">
-                <ul class="header__nav-list">
-                    <li class="header__nav-item nav__search">
-                        <div class="nav__search-wrap">
-                            <input class="nav__search-input" type="text" name="" id="" placeholder="Tìm sản phẩm...">
-                        </div>
-                        <div class="nav__search-btn">
-                            <i class="fas fa-search"></i>
-                        </div>
-                    </li>
-                    <li class="header__nav-item authen-form">
-                        <a href="#" class="header__nav-link">Tài Khoản</a>
+            <ul class="header__nav-list">
+                <li class="header__nav-item nav__search">
+                    <div class="nav__search-wrap">
+                        <input class="nav__search-input" type="text" name="" id="" placeholder="Tìm sản phẩm...">
+                    </div>
+                    <div class="nav__search-btn">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </li>
+                <li class="header__nav-item authen-form">
+                
+                    <c:if test="${sessionScope.acc != null}">
+                        <li class="sub-nav__item">
+                        <a href="#" class="header__nav-link">${sessionScope.acc.userName}</a>
+                        </li>
+                    </c:if>
+                    <ul class="sub-nav">
+                       
+                        <c:if test="${sessionScope.acc == null}">
+                        <li class="sub-nav__item">
+                            <a href="#my-Login" class="sub-nav__link">Đăng Nhập</a>
+                        </li>
+                        </c:if>
+                        <li class="sub-nav__item">
+                            <a href="#my-Register" class="sub-nav__link">Đăng Kí</a>
+                        </li>
+                        <c:if test="${sessionScope.acc != null}">
+                        <li class="sub-nav__item">
+                            <a href="logout" class="sub-nav__link">Đăng xuất</a>
+                        </li>
+                        </c:if>
+                    </ul>
+                    
+                    
+                </li>
+                <li class="header__nav-item index">
+                    <a href="index.html" class="header__nav-link">Trang chủ</a>
+                </li>
+                <li class="header__nav-item">
+                    <a href="#" class="header__nav-link">Giới Thiệu</a>
+                </li>
+                <li class="header__nav-item">
+                    <a href="#" class="header__nav-link">Sản Phẩm</a>
+                    <div class="sub-nav-wrap grid wide">
+                        <c:forEach items="${listC}" var="o">
                         <ul class="sub-nav">
                             <li class="sub-nav__item">
-                                <a href="#my-Login" class="sub-nav__link">Đăng Nhập</a>
-                            </li>
-                            <li class="sub-nav__item">
-                                <a href="#my-Register" class="sub-nav__link">Đăng Kí</a>
-                            </li>
+                                <a href="category?categoryID=${o.categoryID}" class="sub-nav__link heading ${tag == o.categoryID ? "active":""}">${o.categoryName}</a>
+                            </li> 
                         </ul>
-                    </li>
-                    <li class="header__nav-item index">
-                        <a href="index.html" class="header__nav-link">Trang chủ</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="#" class="header__nav-link">Giới Thiệu</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="#" class="header__nav-link">Sản Phẩm</a>
-                        <div class="sub-nav-wrap grid wide">
-                            <ul class="sub-nav">
-                                <li class="sub-nav__item">
-                                    <a href="" class="sub-nav__link heading">Kem dưỡng da</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc toàn thân vvv</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Khuyến mãi</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc cơ thể</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Nước hoa</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc miệng</a>
-                                </li>
-                            </ul>
-                            <ul class="sub-nav">
-                                <li class="sub-nav__item">
-                                    <a href="" class="sub-nav__link heading">Mặt nạ</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc toàn thân vvv</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Khuyến mãi</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc cơ thể</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Nước hoa</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc miệng</a>
-                                </li>
-                            </ul>
-                            <ul class="sub-nav">
-                                <li class="sub-nav__item">
-                                    <a href="" class="sub-nav__link heading">Son</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc toàn thân vvv</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Khuyến mãi</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc cơ thể</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Nước hoa</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc miệng</a>
-                                </li>
-                            </ul>
-                            <ul class="sub-nav">
-                                <li class="sub-nav__item">
-                                    <a href="" class="sub-nav__link heading">Các sản phẩm khác</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc toàn thân vvv</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Khuyến mãi</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc cơ thể</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Nước hoa</a>
-                                </li>
-                                <li class="sub-nav__item">
-                                    <a href="listProduct.html" class="sub-nav__link">Chăm sóc miệng</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="news.html" class="header__nav-link">Tin Tức</a>
-                    </li>
-                    <li class="header__nav-item">
-                        <a href="contact.html" class="header__nav-link">Liên Hệ</a>
-                    </li>
-                </ul>
-            </div>
+                        </c:forEach>
+
+                    </div>
+                </li>
+                <li class="header__nav-item">
+                    <a href="news.html" class="header__nav-link">Tin Tức</a>
+                </li>
+                <li class="header__nav-item">
+                    <a href="contact.html" class="header__nav-link">Liên Hệ</a>
+                </li>
+            </ul>
         </div>
-        <div class="main">
+    </div>
+    <div class="main">
             <!-- Slider -->
             <div class="main__slice">
                 <div class="slider">
@@ -308,7 +255,7 @@
                                             <div class="product__avt" style="padding: 0px"><img style="width: 100%; height: auto" src=".${o.imageLink}"></div>
                                              
                                             <div class="product__info">
-                                                <h3 class="product__name">${o.productName}</h3>
+                                                <h3 href="detail?productID=${o.productID}" class="product__name">${o.productName}</h3>
                                                 <div class="product__price">
                                                     <div class="price__old">
                                                         300.000 đ
@@ -320,12 +267,14 @@
                                                     <span class="product__sale-text">Giảm</span>
                                                 </div>
                                             </div>
-                                            <a href="product.html" class="viewDetail">Xem chi tiết</a>
+                                            <a href="detail?productID=${o.productID}" class="viewDetail">Xem chi tiết</a>
                                             <a href="cart.html" class="addToCart">Thêm vào giỏ</a>
                                         </div>
                                     </div>
                                 </c:forEach>
-                                
+                              </div>
+                            </div>
+                        </div>
                        
             <!-- HightLight  -->
             <div class="main__frame">
@@ -354,6 +303,9 @@
                             <a href="cart.html" class="addToCart">Thêm vào giỏ</a>
                         </div>
                          </c:forEach>
+                        </div>
+                    </div>
+                </div>
                         
             <!-- Sales Policy -->
             <div class="main__policy">
@@ -556,17 +508,18 @@
         <!-- Modal Form -->
         <div class="ModalForm">
             <div class="modal" id="my-Register">
+                <form action="signup" method="post" class="form-signup">
                 <a href="#" class="overlay-close"></a>
                 <div class="authen-modal register">
                     <h3 class="authen-modal__title">Đăng Kí</h3>
                     <div class="form-group">
                         <label for="account" class="form-label">Họ Tên</label>
                         <input id="account" name="account" type="text" class="form-control">
-                        <span class="form-message">Không hợp lệ !</span>
+                       
                     </div>
                     <div class="form-group">
-                        <label for="password" class="form-label">Tài khoản Email *</label>
-                        <input id="password" name="password" type="text" class="form-control">
+                        <label for="username" class="form-label">Tài khoản *</label>
+                        <input id="username" name="username" type="text" class="form-control">
                         <span class="form-message"></span>
                     </div>
                     <div class="form-group">
@@ -575,23 +528,27 @@
                         <span class="form-message"></span>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="form-label">Nhập lại mật khẩu *</label>
-                        <input id="password" name="password" type="text" class="form-control">
+                        <label for="repassword" class="form-label">Nhập lại mật khẩu *</label>
+                        <input id="repassword" name="repassword" type="text" class="form-control">
                         <span class="form-message"></span>
                     </div>
                     <div class="authen__btns">
-                        <div class="btn btn--default">Đăng Kí</div>
+                        <button class="btn btn--default" type="submit">Đăng Kí</button>
                     </div>
                 </div>
+                                    </form>
+
             </div>
             <div class=" modal" id="my-Login">
+                <form class="form-signin" action="login" method="post">
                 <a href="#" class="overlay-close"></a>
                 <div class="authen-modal login">
                     <h3 class="authen-modal__title">Đăng Nhập</h3>
+                    <p class="text-danger">${mess}</p>
                     <div class="form-group">
-                        <label for="account" class="form-label">Địa chỉ email *</label>
-                        <input id="account" name="account" type="text" class="form-control">
-                        <span class="form-message">Tài khoản không chính xác !</span>
+                        <label for="username" class="form-label">Tài khoản *</label>
+                        <input id="username" name="username" type="text" class="form-control">
+                       
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-label">Mật khẩu *</label>
@@ -599,12 +556,13 @@
                         <span class="form-message"></span>
                     </div>
                     <div class="authen__btns">
-                        <div class="btn btn--default">Đăng Nhập</div>
+                        <button class="btn btn--default" type="submit" >Đăng Nhập</button>
                         <input type="checkbox" class="authen-checkbox">
                         <label class="form-label">Ghi nhớ mật khẩu</label>
                     </div>
                     <a class="authen__link">Quên mật khẩu ?</a>
                 </div>
+                    </form>
             </div>
             <div class="up-top" id="upTop" onclick="goToTop()">
                 <i class="fas fa-chevron-up"></i>

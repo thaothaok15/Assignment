@@ -151,8 +151,8 @@ public class DAO {
     }
          
     public void signup(String userName, String password ){
-        String query = "insert into account\n"
-                +"value(?,?,0,0";
+        String query = "insert into Accounts\n"
+                +"value(?,?,0,0)";
         try{
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -163,6 +163,29 @@ public class DAO {
         }catch(Exception e){
             
         }
+    } 
+    
+     public List<Product> searchByName(String txtSearch){
+        List<Product> list = new ArrayList<>();
+        String query = "select * from Product\n "
+                +"where [ProductName] like ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%"+txtSearch+"%");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Product(rs.getInt("ProductID"),
+                                    rs.getString("ProductName"),    
+                                    rs.getString("imageLink"),    
+                                    rs.getDouble("Price"),    
+                                    rs.getString("Status"),                    
+                                    rs.getString("Description")));
+            }
+        }catch(Exception e){
+            
+        }
+       return list; 
     } 
     public static void main(String[] args) throws Exception  {
         DAO dao = new DAO();
