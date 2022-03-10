@@ -205,6 +205,21 @@ public class DAO {
         }
         return list;
     }
+        public void deleteProduct(String productID) {
+
+        String query = "delete from Product\n"
+                + "where ProductID = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, productID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+       
+    }
+
     
     
 

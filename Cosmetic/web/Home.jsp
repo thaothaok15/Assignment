@@ -183,7 +183,7 @@
                 </li>
                 <c:if test="${sessionScope.acc.isAdmin == 1}">
                 <li class="header__nav-item">
-                    <a href="managerProduct.jsp" class="header__nav-link">Quản lí sản phẩm</a>
+                    <a href="manager" class="header__nav-link">Quản lí sản phẩm</a>
                 </li>
                 <li class="header__nav-item">
                     <a href="contact.html" class="header__nav-link">Quản lí tài khoản</a>
