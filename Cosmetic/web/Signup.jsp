@@ -22,6 +22,7 @@ body {
 	color: #fff;
 	background: #3598dc;
 	font-family: 'Roboto', sans-serif;
+        
 }
 .form-control {
 	height: 41px;
@@ -38,6 +39,7 @@ body {
 .signup-form {
 	width: 400px;
 	margin: 30px auto;
+        
 }
 .signup-form form {
 	color: #999;
@@ -103,7 +105,7 @@ body {
     <form action="signup" method="post">
 		<h2>Đăng Kí</h2>
 		
-		<hr>
+		<!--<hr>-->
         <p class="text-danger">${message}</p>
         <div class="form-group">
         	<input type="text" class="form-control" name="username" placeholder="Tài khoản" required="required">
@@ -112,7 +114,7 @@ body {
             <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="re_password" placeholder="Nhập lại mật khẩu" required="required">
+            <input type="password" class="form-control" name="repassword" placeholder="Nhập lại mật khẩu" required="required">
         </div>        
        
 		<div class="form-group">

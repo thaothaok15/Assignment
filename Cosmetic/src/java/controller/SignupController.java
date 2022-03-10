@@ -33,10 +33,10 @@ public class SignUpController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String username = request.getParameter("userName");
+        String username = request.getParameter("username");
        String password = request.getParameter("password");
-       String re_password = request.getParameter("re_password");
-       if(!password.equals(re_password)){
+       String repassword = request.getParameter("repassword");
+       if(!password.equals(repassword)){
            
            response.sendRedirect("Signup.jsp");
        }else{
@@ -44,7 +44,7 @@ public class SignUpController extends HttpServlet {
            Account a = dao.checkAccountExist(username);
            if(a == null){
                dao.signup(username, password);
-               
+                session.setAttribute("acc", a);
                response.sendRedirect("home");
            }else{
                request.setAttribute("message", "Tài khoản đã tồn tại");
