@@ -8,6 +8,7 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
@@ -181,6 +182,23 @@ public class DAO {
                         rs.getDouble("Price"),
                         rs.getString("Status"),
                         rs.getString("Description")));
+            }
+        } catch (Exception e) {
+
+        }
+        return list;
+    }
+
+    public List<Categories> getAllCategory() {
+        List<Categories> list = new ArrayList<>();
+        String query = "select * from Categories";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Categories(rs.getInt("CategoryID"),
+                        rs.getString("CategoryName")));
             }
         } catch (Exception e) {
 
