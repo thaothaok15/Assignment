@@ -61,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listP}" var="o">
+                        <c:forEach items="${requestScope.listP}" var="o">
                             <tr>
                                 <td>
                                     <span class="custom-checkbox">
