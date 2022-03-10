@@ -63,20 +63,21 @@
                              <li class="sub-nav__item">
                         <a href="#" class="header__nav-link">${sessionScope.acc.userName}</a>
                             </li>
+                             <li>
+                        <a href="logout" class="header__account-login">Đăng Xuất</a>
+                        </li>
                         </c:if>
                         <c:if test="${sessionScope.acc == null}">
                             <li>
                         <a href="Login.jsp" class="header__account-login">Đăng Nhập</a>
                         </li>
-                        </c:if>
+
+                          
                         <li>
                         <a href="Signup.jsp" class="header__account-register">Đăng Kí</a>
                         </li>
-                         <c:if test="${sessionScope.acc != null}">
-                            <li>
-                        <a href="logout" class="header__account-login">Đăng Xuất</a>
-                        </li>
-                        </c:if>
+                         </c:if>
+                        
                     </div>
                     <!-- Cart -->
                     <div class="header__cart have" href="#">
@@ -146,6 +147,7 @@
                 <li class="header__nav-item authen-form">
                     <a href="#" class="header__nav-link">Tài Khoản</a>
                     <ul class="sub-nav">
+                        
                         <li class="sub-nav__item">
                             <a href="#my-Login" class="sub-nav__link">Đăng Nhập</a>
                         </li>
@@ -179,6 +181,14 @@
                 <li class="header__nav-item">
                     <a href="contact.html" class="header__nav-link">Liên Hệ</a>
                 </li>
+                <c:if test="${sessionScope.acc.isAdmin == 1}">
+                <li class="header__nav-item">
+                    <a href="managerProduct.jsp" class="header__nav-link">Quản lí sản phẩm</a>
+                </li>
+                <li class="header__nav-item">
+                    <a href="contact.html" class="header__nav-link">Quản lí tài khoản</a>
+                </li>
+                </c:if>
             </ul>
         </div>
     </div>

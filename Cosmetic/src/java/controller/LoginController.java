@@ -9,6 +9,7 @@ import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import model.Account;
  *
  * @author Thanh Thao
  */
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     /**
@@ -32,20 +34,19 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession session = request.getSession();
-              String username = request.getParameter("username");
-       String password = request.getParameter("password"); 
-       DAO dao = new DAO();
-       Account a = dao.login(username, password);
-       if(a == null){
-           request.setAttribute("mess", "Tai khoan hoac mat khau khong chinh xac");
-           request.getRequestDispatcher("Home.jsp").forward(request, response);
-       }
-       else{
-           session.setAttribute("acc", a);
-         //  request.getRequestDispatcher("home").forward(request, response);
-         response.sendRedirect("home");
-       }
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoginController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,19 +62,6 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-//       String username = request.getParameter("username");
-//       String password = request.getParameter("password"); 
-//       DAO dao = new DAO();
-//       Account a = dao.login(username, password);
-//       if(a == null){
-//           request.setAttribute("mess", "Tai khoan hoac mat khau khong chinh xac");
-//           request.getRequestDispatcher("Home.jsp").forward(request, response);
-//       }
-//       else{
-//         //  request.getRequestDispatcher("home").forward(request, response);
-//         response.sendRedirect("home");
-//       }
-//        response.sendRedirect("home");
     }
 
     /**
@@ -87,8 +75,19 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-   
+        HttpSession session = request.getSession();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        DAO dao = new DAO();
+        Account a = dao.login(username, password);
+        if (a == null) {
+            request.setAttribute("mess", "Tài khoản hoặc mật khẩu không chính xác");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        } else {
+            session.setAttribute("acc", a);
+          //  request.getRequestDispatcher("homee").forward(request, response);
+           response.sendRedirect("home");
+        }
     }
 
     /**

@@ -13,17 +13,15 @@ public class Account {
     private int adminID;
     private String userName;
     private String password;
-    private int isSeller;
     private int isAdmin;
 
     public Account() {
     }
 
-    public Account(int adminID, String userName, String password, int isSeller, int isAdmin) {
+    public Account(int adminID, String userName, String password, int isAdmin) {
         this.adminID = adminID;
         this.userName = userName;
         this.password = password;
-        this.isSeller = isSeller;
         this.isAdmin = isAdmin;
     }
 
@@ -51,13 +49,6 @@ public class Account {
         this.password = password;
     }
 
-    public int getIsSeller() {
-        return isSeller;
-    }
-
-    public void setIsSeller(int isSeller) {
-        this.isSeller = isSeller;
-    }
 
     public int getIsAdmin() {
         return isAdmin;
@@ -69,8 +60,10 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "adminID=" + adminID + ", userName=" + userName + ", password=" + password + ", isSeller=" + isSeller + ", isAdmin=" + isAdmin + '}';
+        return "Account{" + "adminID=" + adminID + ", userName=" + userName + ", password=" + password + ", isAdmin=" + isAdmin + '}';
     }
+
+   
 
     
 }

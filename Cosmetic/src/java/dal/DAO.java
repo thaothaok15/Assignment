@@ -122,7 +122,6 @@ public class DAO {
                 return new Account(rs.getInt("AdminID"),
                         rs.getString("Username"),
                         rs.getString("Password"),
-                        rs.getInt("isSeller"),
                         rs.getInt("isAdmin"));
             }
         } catch (Exception e) {
@@ -133,7 +132,7 @@ public class DAO {
 
     public Account checkAccountExist(String userName) {
         String query = "select * from Accounts\n"
-                + "where[Usename]=?\n";
+                + "where[Username]=?\n";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -143,7 +142,6 @@ public class DAO {
                 return new Account(rs.getInt("AdminID"),
                         rs.getString("Username"),
                         rs.getString("Password"),
-                        rs.getInt("isSeller"),
                         rs.getInt("isAdmin"));
             }
         } catch (Exception e) {
@@ -189,7 +187,29 @@ public class DAO {
         }
         return list;
     }
+    
+     public List<Product> getProductBySellID(String productID ) {
+        List<Product> list = new ArrayList<>();
+        String query = "select * from Product\n "
+                + "where sellID = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, productID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("imageLink"),
+                        rs.getDouble("Price"),
+                        rs.getString("Status"),
+                        rs.getString("Description")));
+            }
+        } catch (Exception e) {
 
+        }
+        return list;
+    }
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();
         //  List<Product> list = product.getProductByCategoryID(categoryID);
