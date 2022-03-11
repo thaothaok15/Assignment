@@ -76,8 +76,8 @@
                                 </td>
                                 <td>${o.price} $</td>
                                 <td>
-                                    <a href="loadProduct?pid=${o.productID}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="delete?pid=${o.productID}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="update?productID=${o.productID}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                    <a href="delete?productID=${o.productID}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -103,7 +103,7 @@
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="add" method="post">
+                    <form action="add" method="get">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add Product</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -114,20 +114,24 @@
                                 <input name="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" type="text" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input name="quantity" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Image</label>
                                 <input name="image" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <label>Status</label>
+                                <textarea name="status" type="text" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
                                 <label>Price</label>
                                 <input name="price" type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Title</label>
-                                <textarea name="title" class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
