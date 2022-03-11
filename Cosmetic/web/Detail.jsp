@@ -59,8 +59,25 @@
                         </div>
                     </div>
                     <div class="header__account">
-                        <a href="#my-Login" class="header__account-login">Đăng Nhập</a>
-                        <a href="#my-Register" class="header__account-register">Đăng Kí</a>
+                        <c:if test="${sessionScope.acc != null}">
+                             <li class="sub-nav__item">
+                        <a href="#" class="header__nav-link">${sessionScope.acc.userName}</a>
+                            </li>
+                             <li>
+                        <a href="logout" class="header__account-login">Đăng Xuất</a>
+                        </li>
+                        </c:if>
+                        <c:if test="${sessionScope.acc == null}">
+                            <li>
+                        <a href="Login.jsp" class="header__account-login">Đăng Nhập</a>
+                        </li>
+
+                          
+                        <li>
+                        <a href="Signup.jsp" class="header__account-register">Đăng Kí</a>
+                        </li>
+                         </c:if>
+                        
                     </div>
                     <!-- Cart -->
                     <div class="header__cart have" href="#">
@@ -171,16 +188,43 @@
                 <div class="productInfo">
                     <div class="row">
 
-                        <div class="col l-5 m-12 s-12">
+                         <div class="col l-5 m-12 s-12">
                             <div class="owl-carousel owl-theme">
-                                <a href="#" class="product">
-                                     <div class="product__avt" src="${detail.imageLink}">
+                               <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
                                 </div>
-                                   
-
-                                </a>  
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="owl-carousel owl-theme" id="sync2">
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
+                            <a href="#" class="product">
+                                <div class="product__avt" style="background-image: url(${detail.imageLink})">
+                                </div>
+                            </a>
                             </div>
-
                         </div>
                         <div class="col l-7 m-12s s-12 pl">
                             <div class="main__breadcrumb">
@@ -201,7 +245,7 @@
                                 ${detail.price} <span class="priceInfo__unit">đ</span>
                             </div>
                             <div class="productInfo__description">
-                                <span> ${detail.description} </span> 
+                                <span> ${detail.status} </span> 
                             </div>
 
                             <div class="productInfo__addToCart">
@@ -270,18 +314,15 @@
                             <div class="tab-content ">
                                 <div class="tab-pane active ">
                                     <div class="productDes ">
-                                        <div class="productDes__title ">Lorem Ipsum là gì?</div>
+                                        <div class="productDes__title ">${detail.productName}</div>
+                                        <p class="productDes__text "> <a href="# " class="productDes__link "></a>${detail.description}
+                                        </p>
+<!--                                        <div class="productDes__title ">Lorem Ipsum là gì?</div>
                                         <p class="productDes__text "> <a href="# " class="productDes__link ">Lorem Ipsum </a> chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn cho ngành
                                             công nghiệp in ấn từ những năm 1500, khi một họa sĩ vô danh ghép nhiều đoạn văn bản với nhau để tạo thành một bản mẫu văn bản. Đoạn văn bản này không những đã tồn tại năm thế kỉ, mà khi được áp dụng vào tin học
                                             văn phòng, nội dung của nó vẫn không hề bị thay đổi. Nó đã được phổ biến trong những năm 1960 nhờ việc bán những bản giấy Letraset in những đoạn Lorem Ipsum, và gần đây hơn, được sử dụng trong các ứng dụng dàn trang,
                                             như Aldus PageMaker.
-                                        </p>
-                                        <div class="productDes__title ">Lorem Ipsum là gì?</div>
-                                        <p class="productDes__text "> <a href="# " class="productDes__link ">Lorem Ipsum </a> chỉ đơn giản là một đoạn văn bản giả, được dùng vào việc trình bày và dàn trang phục vụ cho in ấn. Lorem Ipsum đã được sử dụng như một văn bản chuẩn cho ngành
-                                            công nghiệp in ấn từ những năm 1500, khi một họa sĩ vô danh ghép nhiều đoạn văn bản với nhau để tạo thành một bản mẫu văn bản. Đoạn văn bản này không những đã tồn tại năm thế kỉ, mà khi được áp dụng vào tin học
-                                            văn phòng, nội dung của nó vẫn không hề bị thay đổi. Nó đã được phổ biến trong những năm 1960 nhờ việc bán những bản giấy Letraset in những đoạn Lorem Ipsum, và gần đây hơn, được sử dụng trong các ứng dụng dàn trang,
-                                            như Aldus PageMaker.
-                                        </p>
+                                        </p>-->
                                     </div>
                                 </div>
                                 <div class="tab-pane ">

@@ -263,7 +263,7 @@
                                 <c:forEach items="${listP}" var="o">
                                     <div class="col l-2 m-4 s-6">
                                         <div class="product">
-                                            <div class="product__avt" style="padding: 0px"><img style="width: 100%; height: auto" src=".${o.imageLink}"></div>
+                                            <div class="product__avt" style="padding: 0px"><img style="width: 100%; height: auto" src="${o.imageLink}"></div>
                                              
                                             <div class="product__info">
                                                 <h3 href="detail?productID=${o.productID}" class="product__name">${o.productName}</h3>
