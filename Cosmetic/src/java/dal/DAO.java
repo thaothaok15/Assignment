@@ -221,7 +221,66 @@ public class DAO {
     }
 
     
+    public void insertProduct(String productName, String imageLink, String price,
+            String status, String quantity, String description, String CategoryID){
+            String query = "insert into [Product] ([ProductName],"
+                    + "[Description], "
+                    + "[Quantity], "
+                    + "[imageLink], "
+                    + "[Status], "
+                    + "[Price], "
+                    + "[CategoryID]) "
+                    + "VALUES (? , ?, ?, ?, ?,?, ?)";
+            try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, productName);
+            ps.setString(2, description);
+            ps.setString(3,quantity);
+            ps.setString(4, imageLink);
+            ps.setString(5,status);
+             ps.setString(6,price);
+            ps.setString(7, CategoryID);
+   
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+       
+            
+    }
     
+    public void updateProduct(String productID,
+            String productName, String imageLink, String price,
+            String status, String quantity, String description, String CategoryID){
+            String query = "insert into [Product] ([ProductID],"
+                    + "[ProductName],"
+                    + "[Description], "
+                    + "[Quantity], "
+                    + "[imageLink], "
+                    + "[Status], "
+                    + "[Price], "
+                    + "[CategoryID]) "
+                    + "VALUES (? , ?, ?, ?, ?,?, ?)";
+            try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+             ps.setString(1, productID);
+            ps.setString(2, productName);
+            ps.setString(4, description);
+            ps.setString(4,quantity);
+            ps.setString(5, imageLink);
+            ps.setString(6,status);
+             ps.setString(7,price);
+            ps.setString(8, CategoryID);
+   
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+       
+            
+    }
 
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();

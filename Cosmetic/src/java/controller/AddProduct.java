@@ -8,7 +8,7 @@ package controller;
 import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
-import model.Categories;
-import model.Product;
+
 
 /**
  *
  * @author Thanh Thao
  */
-@WebServlet(name = "ManagerController", urlPatterns = {"/manager"})
-public class ManagerController extends HttpServlet {
+@WebServlet(name = "AddProduct", urlPatterns = {"/add"})
+public class AddProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +42,10 @@ public class ManagerController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManagerController</title>");            
+            out.println("<title>Servlet AddProduct</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManagerController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,30 +63,20 @@ public class ManagerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String productName= request.getParameter("name");
+        String imageLink= request.getParameter("image");
+        String price= request.getParameter("price");
+        String status= request.getParameter("status");
+        String quantity= request.getParameter("quantity");
+        String description= request.getParameter("description");
+        String CategoryID= request.getParameter("category");
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-//        if (a.getIsAdmin() != 1 || a == null) {
-//            PrintWriter out = response.getWriter();
-//            out.println("access denied");
-//        } else {
-//        DAO dao = new DAO();
-//        String txt = request.getParameter("txt");
-//        if (txt == null) {
-//            List<Product> list = dao.getAllProduct();
-//            request.setAttribute("listP", list);
-//        } else{
-//
-//        List<Categories> listC = dao.getAllCategory();
-//        request.setAttribute("listC", listC);
-//        request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
-//        }
-//    }
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
-        List<Categories> listC = dao.getAllCategory();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listP", list);
-        request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
+        dao.insertProduct(productName, imageLink, price, status, quantity, description, CategoryID);
+        response.sendRedirect("manager");
+      // request.getRequestDispatcher("manager").forward(request, response);
     }
 
     /**
@@ -101,7 +90,6 @@ public class ManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
