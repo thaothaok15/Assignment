@@ -18,17 +18,21 @@ public class Product {
   private double price;
   private String status;
   private String description;
+  private String quantity;
+  private String categoryID;
 
     public Product() {
     }
 
-    public Product(int productID, String productName, String imageLink, double price, String status, String description) {
+    public Product(int productID, String productName, String imageLink, double price, String status, String description, String quantity, String categoryID) {
         this.productID = productID;
         this.productName = productName;
         this.imageLink = imageLink;
         this.price = price;
         this.status = status;
         this.description = description;
+        this.quantity = quantity;
+        this.categoryID = categoryID;
     }
 
     public int getProductID() {
@@ -79,14 +83,27 @@ public class Product {
         this.description = description;
     }
 
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", productName=" + productName + ", imageLink=" + imageLink + ", price=" + price + ", status=" + status + ", description=" + description + '}';
+        return "Product{" + "productID=" + productID + ", productName=" + productName + ", imageLink=" + imageLink + ", price=" + price + ", status=" + status + ", description=" + description + ", quantity=" + quantity + ", categoryID=" + categoryID + '}';
     }
- 
-    
-  
 
-    
+   
 
 }

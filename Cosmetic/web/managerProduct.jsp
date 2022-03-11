@@ -96,7 +96,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>
+            <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
 
         </div>
         <!-- Edit Modal HTML -->

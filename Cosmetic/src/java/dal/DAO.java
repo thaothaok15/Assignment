@@ -38,7 +38,9 @@ public class DAO {
                         rs.getString("imageLink"),
                         rs.getDouble("Price"),
                         rs.getString("Status"),
-                        rs.getString("Description")));
+                        rs.getString("Description"),
+                        rs.getString("Quantity"),
+                        rs.getString("CategoryID")));
             }
         } catch (Exception e) {
 
@@ -78,7 +80,9 @@ public class DAO {
                         rs.getString("imageLink"),
                         rs.getDouble("Price"),
                         rs.getString("Status"),
-                        rs.getString("Description")));
+                        rs.getString("Description"),
+                        rs.getString("Quantity"),
+                        rs.getString("CategoryID")));
             }
         } catch (Exception e) {
 
@@ -101,7 +105,9 @@ public class DAO {
                         rs.getString("imageLink"),
                         rs.getDouble("Price"),
                         rs.getString("Status"),
-                        rs.getString("Description"));
+                        rs.getString("Description"),
+                        rs.getString("Quantity"),
+                        rs.getString("CategoryID"));
             }
         } catch (Exception e) {
 
@@ -176,12 +182,14 @@ public class DAO {
             ps.setString(1, "%" + txtSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Product(rs.getInt("ProductID"),
+               list.add(new Product(rs.getInt("ProductID"),
                         rs.getString("ProductName"),
                         rs.getString("imageLink"),
                         rs.getDouble("Price"),
                         rs.getString("Status"),
-                        rs.getString("Description")));
+                        rs.getString("Description"),
+                        rs.getString("Quantity"),
+                        rs.getString("CategoryID")));
             }
         } catch (Exception e) {
 
@@ -253,26 +261,18 @@ public class DAO {
     public void updateProduct(String productID,
             String productName, String imageLink, String price,
             String status, String quantity, String description, String CategoryID){
-            String query = "insert into [Product] ([ProductID],"
-                    + "[ProductName],"
-                    + "[Description], "
-                    + "[Quantity], "
-                    + "[imageLink], "
-                    + "[Status], "
-                    + "[Price], "
-                    + "[CategoryID]) "
-                    + "VALUES (? , ?, ?, ?, ?,?, ?)";
+            String query = "update Product set ProductName = ?,Description= ?,Quantity = ?, imageLink=? ,Status=?,  Price =? , CategoryID=? where ProductID=?";
             try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-             ps.setString(1, productID);
-            ps.setString(2, productName);
-            ps.setString(4, description);
-            ps.setString(4,quantity);
-            ps.setString(5, imageLink);
-            ps.setString(6,status);
-             ps.setString(7,price);
-            ps.setString(8, CategoryID);
+             ps.setString(8, productID);
+            ps.setString(1, productName);
+            ps.setString(2, description);
+            ps.setString(3,quantity);
+            ps.setString(4, imageLink);
+            ps.setString(5,status);
+             ps.setString(6,price);
+            ps.setString(7, CategoryID);
    
             ps.executeUpdate();
         } catch (Exception e) {
