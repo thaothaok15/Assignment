@@ -104,8 +104,6 @@ body {
 <div class="signup-form">
     <form action="signup" method="post">
 		<h2>Đăng Kí</h2>
-		
-		<!--<hr>-->
         <p class="text-danger">${message}</p>
         <div class="form-group">
         	<input type="text" class="form-control" name="username" placeholder="Tài khoản" required="required">
