@@ -83,17 +83,24 @@
                         </c:forEach>
                     </tbody>
                 </table>
+<!--                <div class="clearfix">
+                 <div style="display:inline-block">
+                    <c:forEach begin="${1}" end="${requestScope.num}" var="i">
+                        <button style='margin-right: 1px; display:inline-block; ' class="btn btn-outline-primary ${i == page ? "active":""}">
+                            <a style='text-decoration: none; color: black ' href="list?page=${i}">${i}</a>
+                        </button>
+                    </c:forEach>
+                </div>
+                    </div>-->
                 <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <div style="display:inline-block">
+                    <c:forEach begin="${1}" end="${requestScope.num}" var="i">
                     <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                        <button style='margin-right: 1px; display:inline-block; ' class="btn btn-outline-primary ${i == page ? "active":""}">
+                            <a style='text-decoration: none; color: black ' href="list?page=${i}">${i}</a>
+                        </button>
                     </ul>
+                        </c:forEach>
                 </div>
             </div>
             <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
