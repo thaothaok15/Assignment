@@ -86,9 +86,11 @@
                             3
                         </div>
                         <div class="header__cart-wrap">
+                            
                             <ul class="order__list">
                                 <li class="item-order">
                                     <div class="order-wrap">
+                                        
                                         <a href="product.html" class="order-img">
                                             <img src="./assets/img/product/product1.jpg" alt="">
                                         </a>
@@ -99,7 +101,7 @@
                                         <a href="product.html" class="order-close"><i class="far fa-times-circle"></i></a>
                                     </div>
                                 </li>
-                                <li class="item-order">
+<!--                                <li class="item-order">
                                     <div class="order-wrap">
                                         <a href="product.html" class="order-img">
                                             <img src="./assets/img/product/product1.jpg" alt="">
@@ -122,14 +124,15 @@
                                         </div>
                                         <a href="product.html" class="order-close"><i class="far fa-times-circle"></i></a>
                                     </div>
-                                </li>
+                                </li>-->
                             </ul>
                             <div class="total-money">Tổng cộng: 120.000đ</div>
-                            <a href="cart.html" class="btn btn--default cart-btn">Xem giỏ hàng</a>
+                            <a href="cart" class="btn btn--default cart-btn">Xem giỏ hàng</a>
                             <a href="pay.html" class="btn btn--default cart-btn orange">Thanh toán</a>
                             <!-- norcart -->
                             <!-- <img class="header__cart-img-nocart" src="http://www.giaybinhduong.com/images/empty-cart.png" alt=""> -->
                         </div>
+                            
                     </div>
                 </div>
             </div>
@@ -157,10 +160,10 @@
                     </ul>
                 </li>
                 <li class="header__nav-item index">
-                    <a href="index.html" class="header__nav-link">Trang chủ</a>
+                    <a href="home" class="header__nav-link">Trang chủ</a>
                 </li>
                 <li class="header__nav-item">
-                    <a href="#" class="header__nav-link">Giới Thiệu</a>
+                    <a href="introduction.jsp" class="header__nav-link">Giới Thiệu</a>
                 </li>
                 <li class="header__nav-item">
                     <a href="#" class="header__nav-link">Sản Phẩm</a>
@@ -176,10 +179,10 @@
                     </div>
                 </li>
                 <li class="header__nav-item">
-                    <a href="news.html" class="header__nav-link">Tin Tức</a>
+                    <a href="news.jsp" class="header__nav-link">Tin Tức</a>
                 </li>
                 <li class="header__nav-item">
-                    <a href="contact.html" class="header__nav-link">Liên Hệ</a>
+                    <a href="contact.jsp" class="header__nav-link">Liên Hệ</a>
                 </li>
                 <c:if test="${sessionScope.acc.isAdmin == 1}">
                 <li class="header__nav-item">
@@ -263,7 +266,7 @@
                                 <c:forEach items="${listP}" var="o">
                                     <div class="col l-2 m-4 s-6">
                                         <div class="product">
-                                            <div class="product__avt" style="padding: 0px"><img style="width: 100%; height: auto" src=".${o.imageLink}"></div>
+                                            <div class="product__avt" style="padding: 0px"><img style="width: 100%; height: auto" src="${o.imageLink}"></div>
                                              
                                             <div class="product__info">
                                                 <h3 href="detail?productID=${o.productID}" class="product__name">${o.productName}</h3>
@@ -272,6 +275,7 @@
                                                         300.000 đ
                                                     </div>
                                                     <div class="price__new">${o.price} <span class="price__unit">đ</span></div>
+                                                    <!--<input type="text" id="quantity" name="num" class="form-control input-number" value="1"  >-->
                                                 </div>
                                                 <div class="product__sale">
                                                     <span class="product__sale-percent">24%%</span>
@@ -279,14 +283,15 @@
                                                 </div>
                                             </div>
                                             <a href="detail?productID=${o.productID}" class="viewDetail">Xem chi tiết</a>
-                                            <a href="cart.html" class="addToCart">Thêm vào giỏ</a>
+                                            <a href="cart?productID=${o.productID}" class="addToCart">Thêm vào giỏ</a>
                                         </div>
                                     </div>
                                 </c:forEach>
                               </div>
                             </div>
                         </div>
-                       
+                </div> 
+            </div>
             <!-- HightLight  -->
             <div class="main__frame">
                 <div class="grid wide">
@@ -295,7 +300,7 @@
                     <div class="owl-carousel hight owl-theme">
                          <c:forEach items="${listP}" var="o">
                         <div class="product">
-                            <div class="product__avt"  style="padding: 0px"><img style="width: 100%; height: auto" src=".${o.imageLink}">
+                            <div class="product__avt"  style="padding: 0px"><img style="width: 100%; height: auto" src="${o.imageLink}">
                             </div>
                             <div class="product__info">
                                 <h3 class="product__name">${o.productName}</h3>
@@ -310,8 +315,8 @@
                                     <span class="product__sale-text">Giảm</span>
                                 </div>
                             </div>
-                            <a href="product.html" class="viewDetail">Xem chi tiết</a>
-                            <a href="cart.html" class="addToCart">Thêm vào giỏ</a>
+                            <a href="detail?productID=${o.productID}" class="viewDetail">Xem chi tiết</a>
+                            <a href="cart?productID=${o.productID}" class="addToCart">Thêm vào giỏ</a>
                         </div>
                          </c:forEach>
                         </div>
@@ -366,39 +371,110 @@
                     <h3 class="category__title">Thanh Thảo Cometics</h3>
                     <h3 class="category__heading">Tin Tức</h3>
                     <div class="owl-carousel news owl-theme">
-                        <a href="news.html" class="news">
+                        <a href="news.jsp" class="news">
                             <div class="news__img">
-                                <img src="./assets/img/news/news1.jpg" alt="">
+                                <img src="./assets/img/infor/mỹ phẩm 1.jpg" alt="">
                             </div>
                             <div class="news__body">
-                                <h3 class="news__body-title">Trang điểm đúng cách</h3>
-                                <div class="new__body-date">13/6/2021</div>
+                                <h3 class="news__body-title">Những Item makeup nhà Etude House giá hạt dẻ, chất miễn đùa</h3>
+                                <div class="new__body-date">12/03/2022</div>
                                 <p class="news__description">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In sit molestiae aperiam modi cum deserunt, maxime blanditiis voluptate officiis accusantium minima pariatur harum tenetur quo iste iusto commodi. Modi, culpa?
+                                    Những Item makeup nhà Etude House giá hạt dẻ, chất miễn đùa Không phải là những item makeup mới. Thậm chí nếu không nói là lâu đời. Nhưng ở thời điểm hiện tại, chúng vẫn không lỗi thời. Rất lì lợm. Bao nhiêu dòng makeup mới ra
+                            vẫn không làm chúng ngao ngán. Và tất nhiên, nàng nào muốn Những Item makeup nhà Etude House giá hạt dẻ, chất miễn đùa Không phải là những item makeup mới. Thậm chí nếu không nói là lâu đời. Nhưng ở thời điểm hiện tại, chúng
+                            vẫn không lỗi thời. Rất lì lợm. Bao nhiêu dòng makeup mới ra vẫn không làm chúng ngao ngán. Và tất nhiên, nàng nào muốn Những Item makeup nhà Etude House giá hạt dẻ, chất miễn đùa Không phải là những item makeup mới. Thậm chí
+                            nếu không nói là lâu đời. Nhưng ở thời điểm hiện tại, chúng vẫn không lỗi thời. Rất lì lợm. Bao nhiêu dòng makeup mới ra vẫn không làm chúng ngao ngán. Và tất nhiên, nàng nào muốn Những Item makeup nhà Etude House giá hạt dẻ,
+                            chất miễn đùa Không phải là những item makeup mới. Thậm chí nếu không nói là lâu đời. Nhưng ở thời điểm hiện tại, chúng vẫn không lỗi thời. Rất lì lợm. Bao nhiêu dòng makeup mới ra vẫn không làm chúng ngao ngán. Và tất nhiên,
+                            nàng nào muốn đep chuẩn mực thì mời vào team.Không khác biệt nhiều so với các dòng makeup Hàn Quốc khác.
                                 </p>
                             </div>
                         </a>
-                        <a href="news.html" class="news">
+                        <a href="news.jsp" class="news">
                             <div class="news__img">
-                                <img src="./assets/img/news/news1.jpg" alt="">
+                                <img src="./assets/img/infor/trang điểm.jpg" alt="">
                             </div>
                             <div class="news__body">
-                                <h3 class="news__body-title">Trang điểm đúng cách</h3>
-                                <div class="new__body-date">13/6/2021</div>
+                                <h3 class="news__body-title">Cách trang điểm với lớp nền sáng bóng</h3>
+                                <div class="new__body-date">12/03/2022</div>
                                 <p class="news__description">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In sit molestiae aperiam modi cum deserunt, maxime blanditiis voluptate officiis accusantium minima pariatur harum tenetur quo iste iusto commodi. Modi, culpa?
+                                    Bước 1:Sử dụng kem lót <br>
+                            Để có một lớp nền căng bóng thì không thể thiếu đến kem lót . bạn nên sử dụng kem lót có ánh nhủ như Mac, 3ce…. Vừa có độ nhũ mà còn mỏng mịn.Cách làm rất đơn giản bạn chấm ít kem lót tại các vị trí trên khuôn mặt, dùng cọ hoặc tay tán nhẹ  lên toàn bộ khuôn mặt là xong.<br>
+                            Bước 2:Kem nền <br>
+                            Kem nền là bước không thể thiếu trong cách trang điểm nhẹ nhàng dễ thương. Cách làm cũng giống như kem lót, bạn tán đều và mỏng lớp kem nền lên mặt bằng cọ hoặc bằng bông mút trang điểm.
+                            Lưu ý : Đừng nên sử dụng kem nền quá nhiều vì như thế nhìn da mặt sẽ bị năngj và cứng đơ trông rất không tự nhiên.<br>
+                            Bước 3:Phấn phủ<br>
+                            Để khóa lớp nền thì ta nên phủ môt lớp phấn nhẹ, có thể sử dụng phấn nén hoặc phấn bột, dặm nhẹ và đều tay để lớp nền không bị vón cục nhé.
+                            Theo như các chuyên gia cho biết thì gam màu trung tính sẽ giúp làn da tự nhiên hơn. Tuy nhiên nếu da bạn hơi tái thì phấn nền màu hoa cà
+                            chính là sự lựa chọn đúng đắn nhất.
                                 </p>
                             </div>
                         </a>
-                        <a href="news.html" class="news">
+                        <a href="news.jsp" class="news">
                             <div class="news__img">
-                                <img src="./assets/img/news/news1.jpg" alt="">
+                                <img src="./assets/img/infor/kẻ mắt.jpg" alt="">
                             </div>
                             <div class="news__body">
-                                <h3 class="news__body-title">Trang điểm đúng cách</h3>
-                                <div class="new__body-date">13/6/2021</div>
+                                <h3 class="news__body-title"> Kỹ thuật kẻ mắt bằng eyeliner</h3>
+                                <div class="new__body-date">12/03/2022</div>
                                 <p class="news__description">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In sit molestiae aperiam modi cum deserunt, maxime blanditiis voluptate officiis accusantium minima pariatur harum tenetur quo iste iusto commodi. Modi, culpa?
+                                    Trên thực tế kỹ thuật kẻ eyeliner vô hình nghĩa là kẻ viền mắt phía trong của mí. Đây là cách trang điểm được xuất hiện từ khá lâu tuy nhiên cho đến khi các sao Hàn đồng loạt lựa chọn thì nó mới trở thành xu thế.<br>
+                            Việc kẻ eyeliner vô hình sẽ phần nào đó tạo được điểm nhấn và mang đến sự sắc nét cho đôi mắt. Bên cạnh đó đây cũng là phương pháp trang điểm dành cho những cô nàng ưa thích việc kẻ eyeliner nhưng lại sợ sự dữ dằn của kiểu kẻ mắt mèo<br>
+                        “Mẹo” cho bạn đó là hãy vẽ eyeliner màu nâu nhé, vừa không sợ đậm mà còn đem lại hiểu quả tốt cho kiểu makeup nhẹ nhàng.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="news.jsp" class="news">
+                            <div class="news__img">
+                                <img src="./assets/img/infor/kẻ mắt.jpg" alt="">
+                            </div>
+                            <div class="news__body">
+                                <h3 class="news__body-title"> Kỹ thuật kẻ mắt bằng eyeliner</h3>
+                                <div class="new__body-date">12/03/2022</div>
+                                <p class="news__description">
+                                    Trên thực tế kỹ thuật kẻ eyeliner vô hình nghĩa là kẻ viền mắt phía trong của mí. Đây là cách trang điểm được xuất hiện từ khá lâu tuy nhiên cho đến khi các sao Hàn đồng loạt lựa chọn thì nó mới trở thành xu thế.<br>
+                            Việc kẻ eyeliner vô hình sẽ phần nào đó tạo được điểm nhấn và mang đến sự sắc nét cho đôi mắt. Bên cạnh đó đây cũng là phương pháp trang điểm dành cho những cô nàng ưa thích việc kẻ eyeliner nhưng lại sợ sự dữ dằn của kiểu kẻ mắt mèo<br>
+                        “Mẹo” cho bạn đó là hãy vẽ eyeliner màu nâu nhé, vừa không sợ đậm mà còn đem lại hiểu quả tốt cho kiểu makeup nhẹ nhàng.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="news.jsp" class="news">
+                            <div class="news__img">
+                                <img src="./assets/img/infor/kẻ mắt.jpg" alt="">
+                            </div>
+                            <div class="news__body">
+                                <h3 class="news__body-title"> Kỹ thuật kẻ mắt bằng eyeliner</h3>
+                                <div class="new__body-date">12/03/2022</div>
+                                <p class="news__description">
+                                    Trên thực tế kỹ thuật kẻ eyeliner vô hình nghĩa là kẻ viền mắt phía trong của mí. Đây là cách trang điểm được xuất hiện từ khá lâu tuy nhiên cho đến khi các sao Hàn đồng loạt lựa chọn thì nó mới trở thành xu thế.<br>
+                            Việc kẻ eyeliner vô hình sẽ phần nào đó tạo được điểm nhấn và mang đến sự sắc nét cho đôi mắt. Bên cạnh đó đây cũng là phương pháp trang điểm dành cho những cô nàng ưa thích việc kẻ eyeliner nhưng lại sợ sự dữ dằn của kiểu kẻ mắt mèo<br>
+                        “Mẹo” cho bạn đó là hãy vẽ eyeliner màu nâu nhé, vừa không sợ đậm mà còn đem lại hiểu quả tốt cho kiểu makeup nhẹ nhàng.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="news.jsp" class="news">
+                            <div class="news__img">
+                                <img src="./assets/img/infor/kẻ mắt.jpg" alt="">
+                            </div>
+                            <div class="news__body">
+                                <h3 class="news__body-title"> Kỹ thuật kẻ mắt bằng eyeliner</h3>
+                                <div class="new__body-date">12/03/2022</div>
+                                <p class="news__description">
+                                    Trên thực tế kỹ thuật kẻ eyeliner vô hình nghĩa là kẻ viền mắt phía trong của mí. Đây là cách trang điểm được xuất hiện từ khá lâu tuy nhiên cho đến khi các sao Hàn đồng loạt lựa chọn thì nó mới trở thành xu thế.<br>
+                            Việc kẻ eyeliner vô hình sẽ phần nào đó tạo được điểm nhấn và mang đến sự sắc nét cho đôi mắt. Bên cạnh đó đây cũng là phương pháp trang điểm dành cho những cô nàng ưa thích việc kẻ eyeliner nhưng lại sợ sự dữ dằn của kiểu kẻ mắt mèo<br>
+                        “Mẹo” cho bạn đó là hãy vẽ eyeliner màu nâu nhé, vừa không sợ đậm mà còn đem lại hiểu quả tốt cho kiểu makeup nhẹ nhàng.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="news.jsp" class="news">
+                            <div class="news__img">
+                                <img src="./assets/img/infor/kẻ mắt.jpg" alt="">
+                            </div>
+                            <div class="news__body">
+                                <h3 class="news__body-title"> Kỹ thuật kẻ mắt bằng eyeliner</h3>
+                                <div class="new__body-date">12/03/2022</div>
+                                <p class="news__description">
+                                    Trên thực tế kỹ thuật kẻ eyeliner vô hình nghĩa là kẻ viền mắt phía trong của mí. Đây là cách trang điểm được xuất hiện từ khá lâu tuy nhiên cho đến khi các sao Hàn đồng loạt lựa chọn thì nó mới trở thành xu thế.<br>
+                            Việc kẻ eyeliner vô hình sẽ phần nào đó tạo được điểm nhấn và mang đến sự sắc nét cho đôi mắt. Bên cạnh đó đây cũng là phương pháp trang điểm dành cho những cô nàng ưa thích việc kẻ eyeliner nhưng lại sợ sự dữ dằn của kiểu kẻ mắt mèo<br>
+                        “Mẹo” cho bạn đó là hãy vẽ eyeliner màu nâu nhé, vừa không sợ đậm mà còn đem lại hiểu quả tốt cho kiểu makeup nhẹ nhàng.
                                 </p>
                             </div>
                         </a>
@@ -427,19 +503,19 @@
                         <h3 class="footer__title">Menu</h3>
                         <ul class="footer__list">
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Trang điểm</a>
+                                <a href="news.jsp" class="footer__link">Trang điểm</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Chăm sóc da</a>
+                                <a href="news.jsp" class="footer__link">Chăm sóc da</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Chăm sóc tóc</a>
+                                <a href="news.jsp" class="footer__link">Chăm sóc tóc</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Mỹ Phẩm</a>
+                                <a href="news.jsp" class="footer__link">Mỹ Phẩm</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Chăm sóc toàn thân </a>
+                                <a href="news.jsp" class="footer__link">Chăm sóc toàn thân </a>
                             </li>
                         </ul>
                     </div>
@@ -447,16 +523,16 @@
                         <h3 class="footer__title">Hỗ trợ khách hàng</h3>
                         <ul class="footer__list">
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Hướng dẫn mua hàng</a>
+                                <a href="introduction.jsp" class="footer__link">Hướng dẫn mua hàng</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Giải đáp thắc mắc</a>
+                                <a href="introduction.jsp" class="footer__link">Giải đáp thắc mắc</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Chính sách mua hàng</a>
+                                <a href="introduction.jsp" class="footer__link">Chính sách mua hàng</a>
                             </li>
                             <li class="footer__item">
-                                <a href="#" class="footer__link">Chính sách đổi trả</a>
+                                <a href="introduction.jsp" class="footer__link">Chính sách đổi trả</a>
                             </li>
                         </ul>
                     </div>
@@ -482,14 +558,9 @@
                                 <div class="social-group">
                                     <a href="#" class="social-item"><i class="fab fa-facebook-f"></i>
                                     </a>
-                                    <a href="#" class="social-item"><i class="fab fa-twitter"></i>
+                                    <a href="#" class="social-item"><i class="fab fa-instagram"></i>
                                     </a>
-                                    <a href="#" class="social-item"><i class="fab fa-pinterest-p"></i>
-                                    </a>
-                                    <a href="#" class="social-item"><i class="fab fa-invision"></i>
-                                    </a>
-                                    <a href="#" class="social-item"><i class="fab fa-youtube"></i>  
-                                    </a>
+
                                 </div>
                             </li>
                         </ul>
@@ -516,70 +587,7 @@
                 <span class="footer__text"> &copy Bản quyền thuộc về <a class="footer__link" href="#"> Thanh Thảo</a></span>
             </div>
         </div>
-        <!-- Modal Form -->
-<!--        <div class="ModalForm">
-            <div class="modal" id="my-Register">
-                <form action="signup" method="post" class="form-signup">
-                <a href="#" class="overlay-close"></a>
-                <div class="authen-modal register">
-                    <h3 class="authen-modal__title">Đăng Kí</h3>
-                    <div class="form-group">
-                        <label for="account" class="form-label">Họ Tên</label>
-                        <input id="account" name="account" type="text" class="form-control">
-                       
-                    </div>
-                    <div class="form-group">
-                        <label for="username" class="form-label">Tài khoản *</label>
-                        <input id="username" name="username" type="text" class="form-control">
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="form-label">Mật khẩu *</label>
-                        <input id="password" name="password" type="text" class="form-control">
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="repassword" class="form-label">Nhập lại mật khẩu *</label>
-                        <input id="repassword" name="repassword" type="text" class="form-control">
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="authen__btns">
-                        <button class="btn btn--default" type="submit">Đăng Kí</button>
-                    </div>
-                </div>
-                                    </form>
 
-            </div>
-            <div class=" modal" id="my-Login">
-                <form class="form-signin" action="login" method="post">
-                <a href="#" class="overlay-close"></a>
-                <div class="authen-modal login">
-                    <h3 class="authen-modal__title">Đăng Nhập</h3>
-                    <p class="text-danger">${mess}</p>
-                    <div class="form-group">
-                        <label for="username" class="form-label">Tài khoản *</label>
-                        <input id="username" name="username" type="text" class="form-control">
-                       
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="form-label">Mật khẩu *</label>
-                        <input id="password" name="password" type="text" class="form-control">
-                        <span class="form-message"></span>
-                    </div>
-                    <div class="authen__btns">
-                        <button class="btn btn--default" type="submit" >Đăng Nhập</button>
-                        <input type="checkbox" class="authen-checkbox">
-                        <label class="form-label">Ghi nhớ mật khẩu</label>
-                    </div>
-                    <a class="authen__link">Quên mật khẩu ?</a>
-                </div>
-                    </form>
-            </div>
-            <div class="up-top" id="upTop" onclick="goToTop()">
-                <i class="fas fa-chevron-up"></i>
-            </div>
-
-        </div>-->
         <script>
             $('.owl-carousel.hight').owlCarousel({
                 loop: true,

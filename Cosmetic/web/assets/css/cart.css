@@ -140,3 +140,43 @@
         padding: 0 8px;
     }
 }
+/*.header.scrolling .header__search-wrap {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.header.scrolling .header__search-icon i,
+.header.scrolling .header__search-input,
+.header.scrolling .header__cart i {
+    color: var(--white-cl-1);
+}*/
+/*===Header===*/
+/*.header.scrolling {
+    background-color: transparent;
+}
+
+.header.scrolling .header__nav {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.header.scrolling .header__nav-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header.scrolling .header__nav .header__nav-item:last-child {
+    border-right: none;
+}
+
+.header.scrolling .header__search-wrap {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header.scrolling .header__search-icon i,
+.header.scrolling .header__search-input,
+.header.scrolling .header__account-login,
+.header.scrolling .header__account-register,
+.header.scrolling .header__account-login:after,
+.header.scrolling .name-user,
+.header.scrolling .header__cart i {
+    color: var(--white-cl-1);
+}*/
