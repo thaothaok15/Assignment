@@ -37,7 +37,6 @@ public class SignUpController extends HttpServlet {
        String password = request.getParameter("password");
        String repassword = request.getParameter("repassword");
        if(!password.equals(repassword)){
-           
            response.sendRedirect("Signup.jsp");
        }else{
            DAO dao = new DAO();

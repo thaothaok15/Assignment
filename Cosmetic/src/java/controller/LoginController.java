@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +62,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     /**
@@ -75,20 +76,42 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+              HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String memory = request.getParameter("rem");
         DAO dao = new DAO();
         Account a = dao.login(username, password);
+        // không có tài khoản
         if (a == null) {
             request.setAttribute("mess", "Tài khoản hoặc mật khẩu không chính xác");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
             session.setAttribute("acc", a);
           //  request.getRequestDispatcher("homee").forward(request, response);
+           Cookie user = new Cookie("user", username);
+            Cookie pass = new Cookie("pass", password);
+            Cookie rem = new Cookie("rem", memory);
+            // if not click
+            if(memory==null){
+                //nguoi dung khong tich chuot vao remember me
+                user.setMaxAge(0);
+                pass.setMaxAge(0);
+                rem.setMaxAge(0);
+            } else{
+                // nguoi dung co tich chuot > luu vao cookie
+                user.setMaxAge(365*24*60*60);
+                pass.setMaxAge(365*24*60*60);
+                rem.setMaxAge(365*24*60*60);
+            }
+            response.addCookie(user);
+            response.addCookie(pass);
+            response.addCookie(rem); 
            response.sendRedirect("home");
         }
     }
+            
+        
 
     /**
      * Returns a short description of the servlet.
