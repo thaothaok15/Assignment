@@ -15,7 +15,8 @@ public class Product {
   private int productID;
   private String productName;
   private String imageLink;
-  private double price;
+  private int oldPrice;
+  private int salePrice;
   private String status;
   private String description;
   private String quantity;
@@ -24,11 +25,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productID, String productName, String imageLink, double price, String status, String description, String quantity, String categoryID) {
+    public Product(int productID, String productName, String imageLink, int oldPrice, int salePrice, String status, String description, String quantity, String categoryID) {
         this.productID = productID;
         this.productName = productName;
         this.imageLink = imageLink;
-        this.price = price;
+        this.oldPrice = oldPrice;
+        this.salePrice = salePrice;
         this.status = status;
         this.description = description;
         this.quantity = quantity;
@@ -59,12 +61,20 @@ public class Product {
         this.imageLink = imageLink;
     }
 
-    public double getPrice() {
-        return price;
+    public int getOldPrice() {
+        return oldPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setOldPrice(int oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
+    public int getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(int salePrice) {
+        this.salePrice = salePrice;
     }
 
     public String getStatus() {
@@ -101,9 +111,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", productName=" + productName + ", imageLink=" + imageLink + ", price=" + price + ", status=" + status + ", description=" + description + ", quantity=" + quantity + ", categoryID=" + categoryID + '}';
+        return "Product{" + "productID=" + productID + ", productName=" + productName + ", imageLink=" + imageLink + ", oldPrice=" + oldPrice + ", salePrice=" + salePrice + ", status=" + status + ", description=" + description + ", quantity=" + quantity + ", categoryID=" + categoryID + '}';
     }
 
-   
+    
 
 }

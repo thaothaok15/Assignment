@@ -79,7 +79,7 @@
                                             </div>
                                         </div>
                                         <div class="col l-2 m-2 s-0">
-                                            <div class="main__cart-price"><fmt:formatNumber pattern="##.#" value="${i.product.price}"/></div>
+                                            <div class="main__cart-price"><fmt:formatNumber pattern="##.#" value="${i.product.salePrice}"/></div>
                                         </div>
                                         <div class="col l-2 m-2 s-0">
                                             <div class="buttons_added">
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <div class="col l-2 m-2 s-4">
-                                            <div class="main__cart-price">${i.price*i.quantity}</div>
+                                            <div class="main__cart-price">${i.saleprice*i.quantity}</div>
                                         </div>
                                         <div class="col l-1 m-1 s-0">
                                             

@@ -36,7 +36,8 @@ public class DAO {
                 list.add(new Product(rs.getInt("ProductID"),
                         rs.getString("ProductName"),
                         rs.getString("imageLink"),
-                        rs.getDouble("Price"),
+                        rs.getInt("oldPrice"),
+                        rs.getInt("salePrice"),
                         rs.getString("Status"),
                         rs.getString("Description"),
                         rs.getString("Quantity"),
@@ -78,7 +79,8 @@ public class DAO {
                 list.add(new Product(rs.getInt("ProductID"),
                         rs.getString("ProductName"),
                         rs.getString("imageLink"),
-                        rs.getDouble("Price"),
+                       rs.getInt("oldPrice"),
+                        rs.getInt("salePrice"),
                         rs.getString("Status"),
                         rs.getString("Description"),
                         rs.getString("Quantity"),
@@ -103,7 +105,8 @@ public class DAO {
                 return new Product(rs.getInt("ProductID"),
                         rs.getString("ProductName"),
                         rs.getString("imageLink"),
-                        rs.getDouble("Price"),
+                        rs.getInt("oldPrice"),
+                        rs.getInt("salePrice"),
                         rs.getString("Status"),
                         rs.getString("Description"),
                         rs.getString("Quantity"),
@@ -185,7 +188,8 @@ public class DAO {
                list.add(new Product(rs.getInt("ProductID"),
                         rs.getString("ProductName"),
                         rs.getString("imageLink"),
-                        rs.getDouble("Price"),
+                        rs.getInt("oldPrice"),
+                        rs.getInt("salePrice"),
                         rs.getString("Status"),
                         rs.getString("Description"),
                         rs.getString("Quantity"),
@@ -229,16 +233,17 @@ public class DAO {
     }
 
     
-    public void insertProduct(String productName, String imageLink, String price,
+    public void insertProduct(String productName, String imageLink, String oldPrice,String salePrice,
             String status, String quantity, String description, String CategoryID){
             String query = "insert into [Product] ([ProductName],"
                     + "[Description], "
                     + "[Quantity], "
                     + "[imageLink], "
                     + "[Status], "
-                    + "[Price], "
+                    + "[oldPrice], "
+                    + "[salePrice], "
                     + "[CategoryID]) "
-                    + "VALUES (? , ?, ?, ?, ?,?, ?)";
+                    + "VALUES (? , ?, ?, ?, ?,?, ?,?)";
             try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -247,8 +252,9 @@ public class DAO {
             ps.setString(3,quantity);
             ps.setString(4, imageLink);
             ps.setString(5,status);
-             ps.setString(6,price);
-            ps.setString(7, CategoryID);
+             ps.setString(6,oldPrice);
+              ps.setString(7,salePrice);
+            ps.setString(8, CategoryID);
    
             ps.executeUpdate();
         } catch (Exception e) {
@@ -281,7 +287,47 @@ public class DAO {
        
             
     }
+    
+     public List<Product> getAllProductByPage(List<Product> list, int start, int end){
+        ArrayList<Product> arr = new ArrayList<>();
+        for(int i = start; i < end; i++){
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+     
+     public int countProduct() {
+    String query = "SELECT COUNT(*) FROM  Product";
+        try {
+             conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
 
+        } catch (Exception e) {
+            
+        }
+        return 0;
+    }
+      public List<Account> getAllaccount(){
+            String query = "select * from Accounts";
+            List<Account> list = new ArrayList<>();
+            try {
+                 conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+                while (rs.next()) {                    
+                    list.add(new Account(rs.getInt("AdminID"),
+                        rs.getString("Username"),
+                        rs.getString("Password"),
+                        rs.getInt("isAdmin")));
+                }
+            } catch (Exception e) {
+            }
+            return list;
+        }
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();
         //  List<Product> list = product.getProductByCategoryID(categoryID);
