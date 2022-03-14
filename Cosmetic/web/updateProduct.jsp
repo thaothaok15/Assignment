@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Price</label>
-                                    <input value="${detail.price}" name="price" type="text" class="form-control" required>
+                                    <input value="${detail.salePrice}" name="saleprice" type="text" class="form-control" required>
                                 </div>
 
                                 <div class="form-group">

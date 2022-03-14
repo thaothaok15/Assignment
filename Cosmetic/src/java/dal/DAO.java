@@ -264,21 +264,21 @@ public class DAO {
             
     }
     
-    public void updateProduct(String productID,
-            String productName, String imageLink, String price,
+    public void updateProduct(String productID,String productName, String imageLink, String oldPrice,String salePrice,
             String status, String quantity, String description, String CategoryID){
-            String query = "update Product set ProductName = ?,Description= ?,Quantity = ?, imageLink=? ,Status=?,  Price =? , CategoryID=? where ProductID=?";
+            String query = "update Product set ProductName = ?,Description= ?,Quantity = ?, imageLink=? ,Status=?,  oldPrice =? , CategoryID=?, salePrice=? where ProductID=?";
             try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-             ps.setString(8, productID);
+             ps.setString(9, productID);
             ps.setString(1, productName);
             ps.setString(2, description);
             ps.setString(3,quantity);
             ps.setString(4, imageLink);
             ps.setString(5,status);
-             ps.setString(6,price);
-            ps.setString(7, CategoryID);
+             ps.setString(6,salePrice);
+              ps.setString(7,oldPrice);
+            ps.setString(8, CategoryID);
    
             ps.executeUpdate();
         } catch (Exception e) {

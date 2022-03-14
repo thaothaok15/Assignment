@@ -94,11 +94,13 @@ public class UpdateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
+         request.setCharacterEncoding("UTF-8");
          String productID= request.getParameter("id");
         String productName= request.getParameter("name");
         String imageLink= request.getParameter("image");
-        String price= request.getParameter("price");
+        String salePrice= request.getParameter("saleprice");
+        String oldPrice= request.getParameter("oldprice");
         String status= request.getParameter("status");
         String quantity= request.getParameter("quantity");
         String description= request.getParameter("description");
@@ -106,7 +108,7 @@ public class UpdateProduct extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
         DAO dao = new DAO();
-        dao.updateProduct(productID, productName, imageLink, price, status, quantity, description, CategoryID);
+        dao.updateProduct(productID, productName, imageLink, oldPrice, salePrice, status, quantity, description, CategoryID);
         response.sendRedirect("manager");
     }
 

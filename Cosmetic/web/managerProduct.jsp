@@ -13,6 +13,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Manager Product</title>
+<!--        <link href="assets/css/manager.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,6 +41,13 @@
                 height: 120px;
             }
         </style>
+<!--        <script>
+            $(document).ready(function () {
+                $('#dtTableProduct').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>-->
+    </head>
     <body>
         <div class="container">
             <div class="table-wrapper">
@@ -34,25 +56,20 @@
                         <div class="col-sm-6">
                             <h2>Manage <b>Products</b></h2>
                         </div>
-<!--                     <form class="search-form" action="manager" method="get">
-                    <input type="text" name="txt" placeholder="Search" required>
-                    <button type="submit"  class="btn btn-black" >Search</button>
-                </form>-->
+                        <!--                     <form class="search-form" action="manager" method="get">
+                                            <input type="text" name="txt" placeholder="Search" required>
+                                            <button type="submit"  class="btn btn-black" >Search</button>
+                                        </form>-->
                         <div class="col-sm-6">
                             <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
                             <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
+                <table  class="table table-striped table-hover ">
                     <thead>
                         <tr>
-                            <th>
-                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>
-                            </th>
+
                             <th>ID</th>
                             <th>Name</th>
                             <th>Image</th>
@@ -63,18 +80,13 @@
                     <tbody>
                         <c:forEach items="${requestScope.listP}" var="o">
                             <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
+
                                 <td>${o.productID}</td>
                                 <td>${o.productName}</td>
                                 <td>
                                     <img src="${o.imageLink}">
                                 </td>
-                                <td>${o.price} $</td>
+                                <td>${o.salePrice} $</td>
                                 <td>
                                     <a href="update?productID=${o.productID}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                     <a href="delete?productID=${o.productID}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -83,25 +95,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-<!--                <div class="clearfix">
-                 <div style="display:inline-block">
-                    <c:forEach begin="${1}" end="${requestScope.num}" var="i">
-                        <button style='margin-right: 1px; display:inline-block; ' class="btn btn-outline-primary ${i == page ? "active":""}">
-                            <a style='text-decoration: none; color: black ' href="list?page=${i}">${i}</a>
-                        </button>
-                    </c:forEach>
-                </div>
-                    </div>-->
-                <div class="clearfix">
-                    <div style="display:inline-block">
-                    <c:forEach begin="${1}" end="${requestScope.num}" var="i">
-                    <ul class="pagination">
-                        <button style='margin-right: 1px; display:inline-block; ' class="btn btn-outline-primary ${i == page ? "active":""}">
-                            <a style='text-decoration: none; color: black ' href="list?page=${i}">${i}</a>
-                        </button>
-                    </ul>
-                        </c:forEach>
-                </div>
             </div>
             <a href="home"><button type="button" class="btn btn-primary">Back to home</button></a>
 
@@ -138,7 +131,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
-                                <input name="price" type="text" class="form-control" required>
+                                <input name="saleprice" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
@@ -158,8 +151,8 @@
                 </div>
             </div>
         </div>
-        
 
-    <script src="assets/js/manager.js" type="text/javascript"></script>
-</body>
+
+        <script src="assets/js/manager.js" type="text/javascript"></script>
+    </body>
 </html>
