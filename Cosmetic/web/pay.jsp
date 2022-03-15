@@ -4,11 +4,12 @@
     Author     : Thanh Thao
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- https://cocoshop.vn/ -->
-    <!-- http://mauweb.monamedia.net/vanihome/ -->
+
 
     <head>
         <meta charset="UTF-8">
@@ -47,62 +48,51 @@
                             <div class="pay__heading">Thông tin thanh toán</div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Họ Tên *</label>
-                                <input id="account" name="account" type="text" class="form-control">
-                                <span class="form-message">Không hợp lệ !</span>
+                                <input id="account" name="account" type="text" class="form-control" required>
+                                
+                                
                             </div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Địa chỉ *</label>
-                                <input id="account" name="account" type="text" class="form-control">
+                                <input id="account" name="account" type="text" class="form-control"required>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Tỉnh / Thành phố *</label>
-                                <input id="account" name="account" type="text" class="form-control">
+                                <input id="account" name="account" type="text" class="form-control"required>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Email *</label>
-                                <input id="account" name="account" type="text" class="form-control">
+                                <input id="account" name="account" type="text" class="form-control"required>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Số điện thoại *</label>
-                                <input id="account" name="account" type="text" class="form-control">
+                                <input id="account" name="account" type="text" class="form-control"required>
                                 <span class="form-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="account" class="form-label">Ghi chú cho đơn hàng</label>
-                                <textarea class="form-control" name="" id="" cols="30" rows="20"></textarea>
+                                <textarea class="form-control"  cols="30" rows="20" required></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col l-5 m-12 s-12">
                         <div class="pay-order">
-                            <div class="pay__heading">Đơn hàng của bạn</div>
+                             <div class="pay__heading">Đơn hàng của bạn</div>
+                            <c:set value="${sessionScope.cart}" var="o"/>
+                            <c:forEach items="${o.items}" var="i">
+                           
                             <div class="pay-info">
                                 <div class="main__pay-text">
-                                    Azrouel dress variable</div>
+                                    ${i.product.productName}</div>
                                 <div class="main__pay-price">
-                                    1,120,000 ₫
+                                   ${i.quantity*i.saleprice} ₫
                                 </div>
                             </div>
-                            <div class="pay-info">
-                                <div class="main__pay-text">
-                                    Azrouel dress variable </div>
-                                <div class="main__pay-amount">
-                                    3
-                                </div>
-                                <div class="main__pay-price">
-                                    1,120,000 ₫
-                                </div>
-                            </div>
-                            <div class="pay-info">
-                                <div class="main__pay-text">
-                                    Azrouel dress variable </div>
-                                <div class="main__pay-price">
-                                    1,120,000 ₫
-                                </div>
-                            </div>
+                            
+                            </c:forEach>
                             <div class="pay-info">
                                 <div class="main__pay-text special">
                                     Giao hàng
@@ -110,16 +100,27 @@
                                 <div class="main__pay-text">
                                     Giao hàng miễn phí
                                 </div>
+                              
+
+                            </div>
+                            <div class="pay-info">
+                                <div class="main__pay-text special">
+                                    VAT
+                                </div>
+                                <div class="main__pay-text">
+                                    10%
+                                </div>
+                              
 
                             </div>
                             <div class="pay-info">
                                 <div class="main__pay-text special">
                                     Tổng thành tiền</div>
                                 <div class="main__pay-price">
-                                    1,120,000 ₫
+                                    ${o.getTotalMoney()*1.1} ₫
                                 </div>
                             </div>
-                            <div class="btn btn--default">Đặt hàng</div>
+                                <div class="btn btn--default"><a href="checkout">Đặt hàng</a></div>
                         </div>
 
                     </div>

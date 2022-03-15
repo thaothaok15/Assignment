@@ -79,13 +79,19 @@
                                             </div>
                                         </div>
                                         <div class="col l-2 m-2 s-0">
-                                            <div class="main__cart-price"><fmt:formatNumber pattern="##.#" value="${i.product.salePrice}"/></div>
+                                            <div class="main__cart-price">${i.product.salePrice}</div>
                                         </div>
                                         <div class="col l-2 m-2 s-0">
                                             <div class="buttons_added">
-                                              
-                                                    <input style="text-align: center" type="text" readonly value="${i.quantity}"  /> 
-                                               
+                                                <button>
+                                                    <a href="process?num=-1&id=${i.product.productID}" >-</a>                                               
+                                                </button>
+                                                    <input style="text-align: center" type="text"  readonly value="${i.quantity}"  /> 
+                                                
+                                                 <button>
+                                                    <a  href="process?num=1&id=${i.product.productID}" >+</a>                                                    
+                                                </button>
+                                                
                                             </div>
                                         </div>
                                         <div class="col l-2 m-2 s-4">
@@ -122,7 +128,7 @@
                                 <div class="main__pay-text">
                                     Tổng phụ</div>
                                 <div class="main__pay-price">
-                                    <fmt:formatNumber pattern="###.#" value="${o.getTotalMoney()}"/> ₫
+                                    ${o.getTotalMoney()}" ₫
                                 </div>
                             </div>
                             <div class="pay-info">
@@ -146,7 +152,7 @@
                                 <div class="main__pay-text">
                                     Tổng thành tiền</div>
                                 <div class="main__pay-price">
-                                   <fmt:formatNumber pattern="###.#" value="${o.getTotalMoney()*1.1}"/> ₫
+                                   ${o.getTotalMoney()*1.1} ₫
                                 </div>
                             </div>
                             <a href="pay.jsp" class="btn btn--default orange">Tiến hành thanh toán</a>
@@ -165,7 +171,19 @@
 
         <!-- Script common -->
         <script src="./assets/js/commonscript.js"></script>
+         <script type="text/javascript">
+            function Minus() {
+                var quantity = document.getElementById("quantity").value;
+                quantity--;
+                document.getElementById("quantity").setAttribute('value', quantity);
+            }
+            function Plus() {
+                var quantity = document.getElementById("quantity").value;
+                quantity++;
+                document.getElementById("quantity").setAttribute('value', quantity);
+            }
 
+        </script>
 
     </body>
 

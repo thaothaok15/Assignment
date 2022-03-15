@@ -64,45 +64,39 @@ public class ProcessCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
-//        HttpSession session = request.getSession();
-//        Cart cart = null;
-//        Object o = session.getAttribute("cart");
-//        // in the cart
-//        if (o != null) {
-//            cart = (Cart) o;
-//            // null in the cart
-//        } else {
-//            cart = new Cart();
-//        }
-//        String num_raw = request.getParameter("num").trim();
-//        String id_raw = request.getParameter("id");
-//        int id, num;
-//        try {
-//            id = Integer.parseInt(id_raw);
-//            num = Integer.parseInt(num_raw);
-//            if ((num == -1) && (cart.getQuantityByID(id) <= 1)) {
-//                cart.removeItem(id);
-//            } else {                
-//                Item t = new Item();
-//                DAO dao = new DAO();
-//                Product p = dao.getProductByID(id_raw);
-//                double price = p.getPrice();
-//
-//                if ((num != -1 )&& ((p.getQuantity() <= cart.getQuantityByID(id))) ) {                  
-//                  num = 0;
-//                } else{
-//                t = new Item(p, num, price);
-//                    cart.addItem(t);
-//                }
-//            }
-//        } catch (NumberFormatException e) {
-//        }
-//
-//        List<Item> list = cart.getItems();
-//        session.setAttribute("cart", cart);
-//        session.setAttribute("size", list.size());
-//        request.getRequestDispatcher("cart.jsp").forward(request, response);
+           HttpSession session = request.getSession();
+        Cart cart = null;
+        Object o = session.getAttribute("cart");
+        // in the cart
+        if (o != null) {
+            cart = (Cart) o;
+            // null in the cart
+        } else {
+            cart = new Cart();
+        }
+        String num_raw = request.getParameter("num").trim();
+        String id_raw = request.getParameter("id");
+        int id, num;
+        try {
+            id = Integer.parseInt(id_raw);
+            num = Integer.parseInt(num_raw);
+            if ((num == -1) && (cart.getQuantityByID(id) <= 1)) {
+                cart.removeItem(id);
+            } else {                
+                Item t = new Item();
+                DAO pdb = new DAO();
+                Product p = pdb.getProductByID(id_raw);
+                double price = p.getSalePrice();     
+                t = new Item(p, num, price);
+                    cart.addItem(t);
+            }
+        } catch (Exception e) {
+        }
+
+        List<Item> list = cart.getItems();
+        session.setAttribute("cart", cart);
+        session.setAttribute("size", list.size());
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     /**
