@@ -1,8 +1,9 @@
 <%-- 
-    Document   : Signup
-    Created on : Mar 9, 2022, 11:40:49 PM
+    Document   : updatePassword
+    Created on : Mar 15, 2022, 10:34:27 AM
     Author     : Thanh Thao
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-        <title>Sign Up</title>
+        <title>Change Password</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -107,27 +108,28 @@
     </head>
     <body>
         <div class="signup-form">
-            <form action="signup" method="post">
-                <h2>Đăng Kí</h2>
+            <form action="changePass" method="post">
+                <h2>Change Password</h2>
                 <hr>
 
                  <p class="text-danger">${mess}<p/> 
-                 <p class="text-danger">${mess1}<p/>
+                 
+                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="Tài khoản" required="required">
+                    <input type="text" class="form-control" name="old_password" placeholder="Mật khẩu cũ" required="required">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required="required">
+                    <input type="password" class="form-control" name="new_password" placeholder="Mật khẩu mới" required="required">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="repassword" placeholder="Nhập lại mật khẩu" required="required">
                 </div>        
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg">Đăng Kí</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Lưu thay đổi</button>
                 </div>
             </form>
-            <div class="hint-text">Bạn đã sẵn sàng đăng nhập? <a href="Login.jsp">Đăng nhập</a></div>
+            <!--<div class="hint-text">Bạn đã sẵn sàng đăng nhập? <a href="Login.jsp">Đăng nhập</a></div>-->
         </div>
     </body>
 </html>

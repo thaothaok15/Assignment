@@ -9,6 +9,7 @@ import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,8 @@ import model.Account;
  *
  * @author Thanh Thao
  */
-public class SignUpController extends HttpServlet {
+@WebServlet(name = "UpdatePassword", urlPatterns = {"/changePass"})
+public class UpdatePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +34,19 @@ public class SignUpController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdatePassword</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdatePassword at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,24 +61,7 @@ public class SignUpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-//       String username = request.getParameter("userName");
-//       String password = request.getParameter("password");
-//       String repassword = request.getParameter("repassword");
-//       if(!password.equals(repassword)){
-//           
-//           response.sendRedirect("Home.jsp");
-//       }else{
-//           DAO dao = new DAO();
-//           Account a = dao.checkAccountExist(username);
-//           if(a == null){
-//               dao.signup(username, password);
-//               response.sendRedirect("home");
-//           }else{
-//               response.sendRedirect("Home.jsp");
-//           }
-//       }
-//       
+        response.sendRedirect("updatePassword.jsp");
     }
 
     /**
@@ -78,28 +75,30 @@ public class SignUpController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session = request.getSession();
-
-              String username = request.getParameter("username");
-       String password = request.getParameter("password");
-       String repassword = request.getParameter("repassword");
-       if(!password.equals(repassword)){
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("acc");
+        String new_password = request.getParameter("new_password");
+        String old_password = request.getParameter("old_password");
+        String repassword = request.getParameter("repassword");
+        
+        if(!old_password.equals(account.getPassword())){
             request.setAttribute("mess", "Mật khẩu không chính xác");
-          request.getRequestDispatcher("Signup.jsp").forward(request, response);
-       }else{
-           DAO dao = new DAO();
-           Account a = dao.checkAccountExist(username);
-           if(a == null){
-               dao.signup(username, password);
-               response.sendRedirect("login");
-           }else{
-                request.setAttribute("mess1", "Tài khoản đã tồn tại");
-               request.getRequestDispatcher("Signup.jsp").forward(request, response);
-           }
-       }
-       
-       
-       
+            request.getRequestDispatcher("updatePassword.jsp").forward(request, response);
+            
+        }else{
+            if(!repassword.equals(new_password)){
+            request.setAttribute("mess", "Mật khẩu không chính xác");
+            request.getRequestDispatcher("updatePassword.jsp").forward(request, response); 
+            }
+            else{
+                DAO dao = new DAO();
+                int id = account.getAdminID();
+                dao.updateAccount(new_password, id);
+               response.sendRedirect("home");
+            }
+            
+        }
+        
     }
 
     /**
