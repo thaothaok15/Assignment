@@ -22,8 +22,8 @@ import model.Product;
  *
  * @author Thanh Thao
  */
-@WebServlet(name = "ListProduct", urlPatterns = {"/list"})
-public class ListProduct extends HttpServlet {
+@WebServlet(name = "listUp", urlPatterns = {"/listup"})
+public class listUp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +42,10 @@ public class ListProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListProduct</title>");            
+            out.println("<title>Servlet listUp</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet listUp at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,22 +65,16 @@ public class ListProduct extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String productID = request.getParameter("productID");
-         DAO dao = new DAO();
-         Product p = dao.getProductByID(productID);
-         
-            List<Categories> list2 = dao.getAllCategories();
-            request.setAttribute("listC", list2);
-            List<Product> list3 = dao.OrderByPriceDesc();
-            List<Product> list4 = dao.OrderByPriceAsc();
-            request.setAttribute("listOD", list3);
-              request.setAttribute("listOA", list4);
-          //  request.setAttribute("tag", categoryID);
-         List<Product> list = dao.getAllProduct();
-       
-         
-        request.setAttribute("listP", list);
-         request.setAttribute("detail", p);
-         request.getRequestDispatcher("listProduct.jsp").forward(request, response);
+        DAO dao = new DAO();
+        Product p = dao.getProductByID(productID);
+
+        List<Categories> list2 = dao.getAllCategories();
+        request.setAttribute("listC", list2);
+        List<Product> list3 = dao.OrderByPriceDesc();
+
+        request.setAttribute("listP", list3);
+        request.setAttribute("detail", p);
+        request.getRequestDispatcher("listProduct.jsp").forward(request, response);
     }
 
     /**
