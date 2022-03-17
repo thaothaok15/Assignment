@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
+import model.Profile;
 
 /**
  *
@@ -62,7 +63,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.getRequestDispatcher("login.jsp").forward(request, response);
+         request.getRequestDispatcher("Login.jsp").forward(request, response);
     }
 
     /**
@@ -87,6 +88,14 @@ public class LoginController extends HttpServlet {
             request.setAttribute("mess", "Tài khoản hoặc mật khẩu không chính xác");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
+            if(a.getRole() == -1){
+            request.setAttribute("mess", "Tài khoản đã bị khóa");
+            request.getRequestDispatcher("Login.jsp").forward(request, response); 
+            }else{
+                
+            
+            Profile profile = dao.getProfile(a.getProfileID());
+            session.setAttribute("profile", profile);
             session.setAttribute("acc", a);
           //  request.getRequestDispatcher("homee").forward(request, response);
            Cookie user = new Cookie("user", username);
@@ -108,10 +117,11 @@ public class LoginController extends HttpServlet {
             response.addCookie(pass);
             response.addCookie(rem); 
            response.sendRedirect("home");
+            
         }
     }
             
-        
+    }   
 
     /**
      * Returns a short description of the servlet.

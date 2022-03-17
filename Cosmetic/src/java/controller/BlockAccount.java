@@ -64,7 +64,7 @@ public class BlockAccount extends HttpServlet {
             throws ServletException, IOException {
                HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a.getAdminID() != 1 || a == null) {
+        if (a.getAccountID() != 1 || a == null) {
             PrintWriter out = response.getWriter();
             out.println("access denied");
         } else {
@@ -74,10 +74,10 @@ public class BlockAccount extends HttpServlet {
          
         if(aid_pas == 1){
             request.setAttribute("mess", "This is Admin, can't not Block!!");
-            request.getRequestDispatcher("managerACc").forward(request, response);
+            request.getRequestDispatcher("managerAcc").forward(request, response);
         } else {
         dao.BlockAccount(aid);
-        response.sendRedirect("managerACc");
+        response.sendRedirect("managerAcc");
         }
         }
     }

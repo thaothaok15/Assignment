@@ -62,9 +62,10 @@ public class ManagerAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+       
+    HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-        if (a.getIsAdmin() != 1 || a == null) {
+        if (a.getAccountID() != 1 || a == null) {
             PrintWriter out = response.getWriter();
             out.println("access denied");
         } else {
@@ -86,7 +87,7 @@ public class ManagerAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
 
     /**
