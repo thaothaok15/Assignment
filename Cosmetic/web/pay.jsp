@@ -34,6 +34,16 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Owl caroucel Js-->
         <script src="assets/owlCarousel/owl.carousel.min.js"></script>
+        <script>
+
+
+            function myfunction() {
+
+                var address2 = document.getElementById("address2").value;
+//                localStorage.setItem('address2', address2);
+                window.location.href = "checkout?address2=" + address2;
+            }
+        </script>
     </head>
 
     <body>
@@ -46,52 +56,45 @@
                     <div class="col l-7 m-12 s-12">
                         <div class="pay-information">
                             <div class="pay__heading">Thông tin thanh toán</div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Họ Tên *</label>
-                                <input id="account" name="account" type="text" class="form-control" required>
-                                
-                                
-                            </div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Địa chỉ *</label>
-                                <input id="account" name="account" type="text" class="form-control"required>
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Tỉnh / Thành phố *</label>
-                                <input id="account" name="account" type="text" class="form-control"required>
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Email *</label>
-                                <input id="account" name="account" type="text" class="form-control"required>
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Số điện thoại *</label>
-                                <input id="account" name="account" type="text" class="form-control"required>
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="account" class="form-label">Ghi chú cho đơn hàng</label>
-                                <textarea class="form-control"  cols="30" rows="20" required></textarea>
-                            </div>
+                            <form action="checkout" method="post">
+                                <div class="form-group">
+                                    <label for="account" class="form-label">Họ Tên *</label>
+                                    <input id="account" name="Fullname" type="text" value="${profile.name}" class="form-control" readonly="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="account" class="form-label">Địa chỉ nhận hàng *</label>
+                                    <input id="address2" name="address2" type="text" class="form-control"required="required">
+                                    <span class="form-message"></span>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="account" class="form-label">Email *</label>
+                                    <input id="account" name="email" type="text" value="${profile.email}" class="form-control" readonly="">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="account" class="form-label">Số điện thoại *</label>
+                                    <input id="account" name="phone" type="text" value="${profile.phone}" class="form-control"readonly="">
+                                    <span class="form-message"></span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col l-5 m-12 s-12">
                         <div class="pay-order">
-                             <div class="pay__heading">Đơn hàng của bạn</div>
+                            <div class="pay__heading">Đơn hàng của bạn</div>
                             <c:set value="${sessionScope.cart}" var="o"/>
                             <c:forEach items="${o.items}" var="i">
-                           
-                            <div class="pay-info">
-                                <div class="main__pay-text">
-                                    ${i.product.productName}</div>
-                                <div class="main__pay-price">
-                                   ${i.quantity*i.saleprice} ₫
+
+                                <div class="pay-info">
+                                    <div class="main__pay-text">
+                                        ${i.product.productName}</div>
+                                    <div class="main__pay-price">
+                                        ${i.quantity*i.saleprice} ₫
+                                    </div>
                                 </div>
-                            </div>
-                            
+
                             </c:forEach>
                             <div class="pay-info">
                                 <div class="main__pay-text special">
@@ -100,7 +103,7 @@
                                 <div class="main__pay-text">
                                     Giao hàng miễn phí
                                 </div>
-                              
+
 
                             </div>
                             <div class="pay-info">
@@ -110,7 +113,7 @@
                                 <div class="main__pay-text">
                                     10%
                                 </div>
-                              
+
 
                             </div>
                             <div class="pay-info">
@@ -120,7 +123,7 @@
                                     ${o.getTotalMoney()*1.1} ₫
                                 </div>
                             </div>
-                                <div class="btn btn--default"><a href="checkout">Đặt hàng</a></div>
+                            <div class="btn btn--default"><a onclick="myfunction()" href="#">Đặt hàng</a></div>
                         </div>
 
                     </div>
