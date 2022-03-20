@@ -72,6 +72,7 @@ public class listdown extends HttpServlet {
 
         request.setAttribute("listP", list3);
         request.setAttribute("detail", p);
+        request.setAttribute("type", 3);
         request.getRequestDispatcher("listProduct.jsp").forward(request, response);
     }
 
