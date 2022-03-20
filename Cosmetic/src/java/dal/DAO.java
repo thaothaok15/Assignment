@@ -189,8 +189,7 @@ public class DAO {
     }
 
     public void insertProfile(String name, String email, String address, String phone) {
-        String query = "insert into Profile\n"
-                + "values(?,?,?,?)";
+        String query = "insert into Profile(Name,Email,Address,Phone) values(?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -205,15 +204,14 @@ public class DAO {
         }
     }
 
-    public void signup(String userName, String password) {
-        String query = "insert into Account\n"
-                + "values(?,?,0,3)";
+    public void signup(String userName, String password, int profileID) {
+        String query = "insert into Account(Username,Password,role,ProfileID) values(?,?,0,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, userName);
             ps.setString(2, password);
-
+            ps.setInt(3, profileID);
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -331,13 +329,7 @@ public class DAO {
 
     }
 
-    public List<Product> getAllProductByPage(List<Product> list, int start, int end) {
-        ArrayList<Product> arr = new ArrayList<>();
-        for (int i = start; i < end; i++) {
-            arr.add(list.get(i));
-        }
-        return arr;
-    }
+ 
 
     public int countProduct() {
         String query = "SELECT COUNT(*) FROM  Product";
@@ -397,14 +389,32 @@ public class DAO {
         }
     }
 
-    public void updateAccount(String new_password, int AccountID) {
-        String query = "update Account set  Password=? where AccountID=?";
+    public void updateAccount(String username, String new_password, int AccountID) {
+        String query = "update Account set username = ?,  Password=? where AccountID=?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
 
-            ps.setString(1, new_password);
+            ps.setString(1, username);
+            ps.setString(2, new_password);
             ps.setInt(2, AccountID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+//            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+    public void updateProfile(String name,String email, String address,String phone, int ProfileID) {
+        String query = "update Profile set  Name=?, Email=?, Address=?,Phone=? where ProfileID=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, address);
+            ps.setString(4, phone);
+            ps.setInt(5, ProfileID);
             ps.executeUpdate();
         } catch (Exception e) {
 //            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
@@ -426,6 +436,26 @@ public class DAO {
                         rs.getString("Email"),
                         rs.getString("Address"),
                         rs.getString("Phone"));
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+     public Account getAccount(int profileID) {
+        String query = "select * from Account\n"
+                + "where[ProfileID]=?\n";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, profileID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getInt("AccountID"),
+                        rs.getString("Username"),
+                        rs.getString("Password"),
+                        rs.getInt("role"),
+                        rs.getInt("ProfileID"));
             }
         } catch (Exception e) {
 

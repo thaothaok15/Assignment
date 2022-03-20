@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
+import model.Profile;
 
 /**
  *
@@ -40,7 +41,7 @@ public class UpdatePassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdatePassword</title>");            
+            out.println("<title>Servlet UpdatePassword</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdatePassword at " + request.getContextPath() + "</h1>");
@@ -61,7 +62,13 @@ public class UpdatePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("updatePassword.jsp");
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("acc");
+        DAO dao = new DAO();
+        Profile profile = dao.getProfile(account.getProfileID());
+        request.setAttribute("profile", profile);
+        request.getRequestDispatcher("updatePassword.jsp").forward(request, response);
+//        response.sendRedirect("updatePassword.jsp");
     }
 
     /**
@@ -76,29 +83,36 @@ public class UpdatePassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("acc");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String username = request.getParameter("username");
         String new_password = request.getParameter("new_password");
         String old_password = request.getParameter("old_password");
         String repassword = request.getParameter("repassword");
-        
-        if(!old_password.equals(account.getPassword())){
+        Account account = (Account) session.getAttribute("acc");
+        Profile profile = (Profile) session.getAttribute("profile");
+        if (!old_password.equals(account.getPassword())) {
             request.setAttribute("mess", "Mật khẩu không chính xác");
             request.getRequestDispatcher("updatePassword.jsp").forward(request, response);
-            
-        }else{
-            if(!repassword.equals(new_password)){
-            request.setAttribute("mess", "Mật khẩu không chính xác");
-            request.getRequestDispatcher("updatePassword.jsp").forward(request, response); 
-            }
-            else{
+
+        } else {
+            if (!repassword.equals(new_password)) {
+                request.setAttribute("mess", "Mật khẩu không chính xác");
+                request.getRequestDispatcher("updatePassword.jsp").forward(request, response);
+            } else {
+
                 DAO dao = new DAO();
-                int id = account.getAdminID();
-                dao.updateAccount(new_password, id);
-               response.sendRedirect("home");
+                int accountId = account.getAccountID();
+                int profileId = profile.getProfileID();
+                dao.updateAccount(username, new_password, accountId);
+                dao.updateProfile(name, email, address, phone, profileId);
+                response.sendRedirect("home");
             }
-            
+
         }
-        
+
     }
 
     /**
