@@ -80,6 +80,7 @@ public class ListProduct extends HttpServlet {
          
         request.setAttribute("listP", list);
          request.setAttribute("detail", p);
+         request.setAttribute("type", 1);
          request.getRequestDispatcher("listProduct.jsp").forward(request, response);
     }
 

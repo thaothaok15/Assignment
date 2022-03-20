@@ -56,9 +56,9 @@
                             Hiển thị kết quả theo
                         </h3>                 
                         <select  name="forma" onchange="location = this.value;" style="width: 90%; height: 40px; font-size: 16px">
-                            <option value="list">Thứ tự mặc định</option>
-                            <option value="listup">Giá: Cao đến thấp</option>
-                            <option value="listdown">Giá : Thấp đến cao</option>
+                            <option ${type == 1?"selected":""} value="list">Thứ tự mặc định</option>
+                            <option ${type == 2?"selected":""} value="listup">Giá: Cao đến thấp</option>
+                            <option ${type == 3?"selected":""} value="listdown">Giá: Thấp đến cao</option>
                         </select>
                     </div>
                 </div>

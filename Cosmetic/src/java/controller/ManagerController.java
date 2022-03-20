@@ -66,29 +66,29 @@ public class ManagerController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("acc");
-//        if (a.getIsAdmin() != 1 || a == null) {
-//            PrintWriter out = response.getWriter();
-//            out.println("access denied");
-//        } else {
-//        DAO dao = new DAO();
-//        String txt = request.getParameter("txt");
-//        if (txt == null) {
-//            List<Product> list = dao.getAllProduct();
-//            request.setAttribute("listP", list);
-//        } else{
-//
-//        List<Categories> listC = dao.getAllCategory();
-//        request.setAttribute("listC", listC);
-//        request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
-//        }
-//    }
+        if (a.getRole() != 1 || a == null) {
+            PrintWriter out = response.getWriter();
+            out.println("access denied");
+        } else {
         DAO dao = new DAO();
-        List<Product> list = dao.getAllProduct();
+       
+       
+            List<Product> list = dao.getAllProduct();
+            request.setAttribute("listP", list);
+      
         List<Categories> listC = dao.getAllCategory();
         request.setAttribute("listC", listC);
-        request.setAttribute("listP", list);
         request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
+        }
     }
+//        DAO dao = new DAO();
+//        List<Product> list = dao.getAllProduct();
+//        
+//        List<Categories> listC = dao.getAllCategory();
+//        request.setAttribute("listC", listC);
+//        request.setAttribute("listP", list);
+//        request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
+   // }
 
     /**
      * Handles the HTTP <code>POST</code> method.

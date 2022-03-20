@@ -74,6 +74,7 @@ public class listUp extends HttpServlet {
 
         request.setAttribute("listP", list3);
         request.setAttribute("detail", p);
+        request.setAttribute("type", 2);
         request.getRequestDispatcher("listProduct.jsp").forward(request, response);
     }
 

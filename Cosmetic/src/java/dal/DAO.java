@@ -168,9 +168,46 @@ public class DAO {
         return null;
     }
 
+    public List<Profile> getAllProfile() {
+        List<Profile> list = new ArrayList<>();
+        String query = "select * from Profile";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Profile(rs.getInt("ProfileID"),
+                        rs.getString("Name"),
+                        rs.getString("Email"),
+                        rs.getString("Address"),
+                        rs.getString("Phone")));
+            }
+        } catch (Exception e) {
+
+        }
+        return list;
+    }
+
+    public void insertProfile(String name, String email, String address, String phone) {
+        String query = "insert into Profile\n"
+                + "values(?,?,?,?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, address);
+            ps.setString(4, phone);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+
+        }
+    }
+
     public void signup(String userName, String password) {
         String query = "insert into Account\n"
-                + "values(?,?,0,?)";
+                + "values(?,?,0,3)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -187,11 +224,11 @@ public class DAO {
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = new ArrayList<>();
         String query = "select * from Product\n "
-                + "where [ProductName] like ?";
+                + "where [ProductName] like %?%";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + txtSearch + "%");
+            ps.setString(1, txtSearch);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Product(rs.getInt("ProductID"),
@@ -272,21 +309,20 @@ public class DAO {
 
     }
 
-    public void updateProduct(String productID, String productName, String imageLink, String oldPrice, String salePrice,
+    public void updateProduct(String productID, String productName, String imageLink, String salePrice,
             String status, String quantity, String description, String CategoryID) {
-        String query = "update Product set ProductName = ?,Description= ?,Quantity = ?, imageLink=? ,Status=?,  oldPrice =? , CategoryID=?, salePrice=? where ProductID=?";
+        String query = "update Product set ProductName = ?,Description= ?,Quantity = ?, imageLink=? ,Status=?,  CategoryID=?, salePrice=? where ProductID=?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(9, productID);
+            ps.setString(8, productID);
             ps.setString(1, productName);
             ps.setString(2, description);
             ps.setString(3, quantity);
             ps.setString(4, imageLink);
             ps.setString(5, status);
-            ps.setString(6, salePrice);
-            ps.setString(7, oldPrice);
-            ps.setString(8, CategoryID);
+            ps.setString(7, salePrice);
+            ps.setString(6, CategoryID);
 
             ps.executeUpdate();
         } catch (Exception e) {
@@ -344,7 +380,7 @@ public class DAO {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, aid);
-           
+
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -488,8 +524,8 @@ public class DAO {
         }
         return list;
     }
-    
-     public List<Product> OrderByPriceDesc() {
+
+    public List<Product> OrderByPriceDesc() {
         List<Product> list = new ArrayList<>();
         String query = "select * from Product\n "
                 + "order by salePrice desc";
@@ -514,8 +550,8 @@ public class DAO {
         }
         return list;
     }
-     
-      public List<Product> OrderByPriceAsc() {
+
+    public List<Product> OrderByPriceAsc() {
         List<Product> list = new ArrayList<>();
         String query = "select * from Product\n "
                 + "order by salePrice asc";
@@ -540,8 +576,6 @@ public class DAO {
         }
         return list;
     }
-
-
 
     public static void main(String[] args) throws Exception {
         DAO dao = new DAO();
