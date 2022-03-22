@@ -221,26 +221,25 @@ public class DAO {
 
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = new ArrayList<>();
-        String query = "select * from Product\n "
-                + "where [ProductName] like %?%";
+        String query2 = "select * from Product where [ProductName] like ?";
         try {
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, txtSearch);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt("ProductID"),
-                        rs.getString("ProductName"),
-                        rs.getString("imageLink"),
-                        rs.getInt("oldPrice"),
-                        rs.getInt("salePrice"),
-                        rs.getString("Status"),
-                        rs.getString("Description"),
-                        rs.getString("Quantity"),
-                        rs.getString("CategoryID")));
+            ps = conn.prepareStatement(query2);
+            ps.setString(1, "%"+txtSearch+"%");
+            ResultSet rs2 = ps.executeQuery();
+            while (rs2.next()) {
+                list.add(new Product(rs2.getInt("ProductID"),
+                        rs2.getString("ProductName"),
+                        rs2.getString("imageLink"),
+                        rs2.getInt("oldPrice"),
+                        rs2.getInt("salePrice"),
+                        rs2.getString("Status"),
+                        rs2.getString("Description"),
+                        rs2.getString("Quantity"),
+                        rs2.getString("CategoryID")));
             }
         } catch (Exception e) {
-
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);
         }
         return list;
     }
@@ -397,7 +396,7 @@ public class DAO {
 
             ps.setString(1, username);
             ps.setString(2, new_password);
-            ps.setInt(2, AccountID);
+            ps.setInt(3, AccountID);
             ps.executeUpdate();
         } catch (Exception e) {
 //            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, e);

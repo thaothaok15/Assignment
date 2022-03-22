@@ -74,8 +74,18 @@ public class HistoryOrder extends HttpServlet {
 //       List<OrderDetail> list = dao.getOrderDetailByOrderID()
 //       List<Order> list = dao.getOrderByAccountID(account.getProfileID());
 //       request.setAttribute("listO", list);
+        
        request.getRequestDispatcher("managerHistoryOrder.jsp").forward(request, response);
      }
+// if (account != null && account.getRole()==1) {
+//            List<Order> listOrders = new DAO().getAllOrders();
+//            request.setAttribute("listOrders", listOrders);
+//            request.getRequestDispatcher("managerHistoryOrder.jsp").forward(request, response);
+//        } else {
+//            List<Order> listOrders = new DAO().getOrderByAccountID(account.getAccountID());
+//            request.setAttribute("listOrders", listOrders);
+//             request.getRequestDispatcher("managerHistoryOrder.jsp").forward(request, response);
+//        }
        
     }
 
